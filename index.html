@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nature Artists Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <h1 class="header__title">Nature Artists <span>Portfolio</span></h1>
+    <div class="header__controls">
+      <div class="view-toggle" id="view-toggle">
+        <button class="view-toggle__btn active" data-view="grid" title="Grid view">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        </button>
+        <button class="view-toggle__btn" data-view="slideshow" title="Slideshow view">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Filter Bar -->
+  <div class="filter-bar" id="filter-bar"></div>
+
+  <!-- Main Content -->
+  <main class="main-content" id="main-content">
+    <!-- Gallery Grid -->
+    <div class="gallery" id="gallery-grid"></div>
+
+    <!-- Loading Skeleton -->
+    <div class="gallery" id="loading" style="display:none;"></div>
+  </main>
+
+  <!-- Slideshow Overlay -->
+  <div class="slideshow" id="slideshow">
+    <button class="slideshow__close" id="slideshow-close">&times;</button>
+    <button class="slideshow__arrow slideshow__arrow--prev" id="slideshow-prev">&#8249;</button>
+    <div class="slideshow__image-container">
+      <img class="slideshow__image" id="slideshow-image" src="" alt="">
+    </div>
+    <button class="slideshow__arrow slideshow__arrow--next" id="slideshow-next">&#8250;</button>
+    <div class="slideshow__info">
+      <div class="slideshow__info-text">
+        <div class="slideshow__title" id="slideshow-title"></div>
+        <div class="slideshow__artist" id="slideshow-artist"></div>
+      </div>
+      <div class="slideshow__counter" id="slideshow-counter"></div>
+    </div>
+    <div class="slideshow__progress" id="slideshow-progress"></div>
+  </div>
+
+  <!-- Artwork Modal -->
+  <div class="modal-backdrop" id="modal-backdrop"></div>
+  <div class="modal" id="artwork-modal">
+    <button class="modal__close" id="modal-close">&times;</button>
+    <div class="modal__scroll" id="modal-scroll"></div>
+  </div>
+
+
+<script>
+// ============================================================
+// DataStore — loads data, manages state, filtering
+// ============================================================
+class DataStore {
+  constructor() {
+    this.artists = [];
+    this.artworks = [];
+    this.elements = [];
+    this._filteredArtworks = [];
+  }
+
+  async load() {
+    let data;
+    if (typeof EMBEDDED_DATA !== 'undefined') {
+      data = EMBEDDED_DATA;
+    } else {
+      const res = await fetch('data.json');
+      if (!res.ok) throw new Error('Failed to load data.json');
+      data = await res.json();
+    }
+    this.artists = data.artists || [];
+    this.artworks = data.artworks || [];
+    this.elements = data.elements || [];
+    this._filteredArtworks = [...this.artworks];
+    return data;
+  }
+
+  getArtist(id) {
+    return this.artists.find(a => a.id === id);
+  }
+
+  getArtwork(id) {
+    return this.artworks.find(a => a.id === id);
+  }
+
+  getArtworksByArtist(artistId) {
+    return this.artworks.filter(a => a.artistId === artistId);
+  }
+
+  getElement(id) {
+    return this.elements.find(e => e.id === id);
+  }
+
+  filterArtworks(activeElements, mode = 'OR') {
+    if (!activeElements || activeElements.length === 0) {
+      this._filteredArtworks = [...this.artworks];
+    } else if (mode === 'AND') {
+      this._filteredArtworks = this.artworks.filter(aw =>
+        activeElements.every(el => aw.elements?.includes(el))
+      );
+    } else {
+      this._filteredArtworks = this.artworks.filter(aw =>
+        activeElements.some(el => aw.elements?.includes(el))
+      );
+    }
+    document.dispatchEvent(new CustomEvent('dataFiltered', {
+      detail: { artworks: this._filteredArtworks, activeElements, mode }
+    }));
+    return this._filteredArtworks;
+  }
+
+  get filteredArtworks() {
+    return this._filteredArtworks;
+  }
+}
+
+// ============================================================
+// FilterBar — element chips, AND/OR toggle, clear
+// ============================================================
+class FilterBar {
+  constructor(store) {
+    this.store = store;
+    this.container = document.getElementById('filter-bar');
+    this.activeElements = new Set();
+    this.mode = 'OR';
+  }
+
+  render() {
+    const elements = this.store.elements;
+    let html = '';
+
+    // Element chips
+    elements.forEach(el => {
+      html += `<button class="filter-chip" data-element="${el.id}" data-color="${el.color}">
+        <span class="chip-icon">${el.icon}</span>${el.label}
+      </button>`;
+    });
+
+    // Divider
+    html += '<div class="filter-divider"></div>';
+
+    // AND/OR toggle
+    html += `<div class="filter-logic-toggle">
+      <button data-mode="OR" class="active">OR</button>
+      <button data-mode="AND">AND</button>
+    </div>`;
+
+    // Clear button
+    html += `<button class="filter-clear-btn" id="filter-clear">Clear</button>`;
+
+    // Count
+    html += `<span class="filter-count" id="filter-count">${this.store.artworks.length} works</span>`;
+
+    this.container.innerHTML = html;
+    this._bindEvents();
+  }
+
+  _bindEvents() {
+    // Chip clicks
+    this.container.querySelectorAll('.filter-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const el = chip.dataset.element;
+        if (this.activeElements.has(el)) {
+          this.activeElements.delete(el);
+          chip.classList.remove('active');
+          chip.style.background = '';
+          chip.style.borderColor = '';
+          chip.style.boxShadow = '';
+          chip.style.color = '';
+        } else {
+          this.activeElements.add(el);
+          const color = chip.dataset.color;
+          chip.classList.add('active');
+          chip.style.background = `${color}33`;
+          chip.style.borderColor = `${color}88`;
+          chip.style.boxShadow = `0 0 12px ${color}40`;
+          chip.style.color = '#fff';
+        }
+        this._applyFilter();
+      });
+    });
+
+    // AND/OR toggle
+    this.container.querySelectorAll('.filter-logic-toggle button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        this.container.querySelectorAll('.filter-logic-toggle button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        this.mode = btn.dataset.mode;
+        this._applyFilter();
+      });
+    });
+
+    // Clear
+    this.container.querySelector('#filter-clear')?.addEventListener('click', () => {
+      this.activeElements.clear();
+      this.container.querySelectorAll('.filter-chip').forEach(c => {
+        c.classList.remove('active');
+        c.style.background = '';
+        c.style.borderColor = '';
+        c.style.boxShadow = '';
+        c.style.color = '';
+      });
+      this._applyFilter();
+    });
+  }
+
+  _applyFilter() {
+    const result = this.store.filterArtworks([...this.activeElements], this.mode);
+    const countEl = document.getElementById('filter-count');
+    if (countEl) countEl.textContent = `${result.length} work${result.length !== 1 ? 's' : ''}`;
+  }
+}
+
+// ============================================================
+// GalleryGrid — masonry card rendering with lazy images
+// ============================================================
+class GalleryGrid {
+  constructor(store, modal) {
+    this.store = store;
+    this.modal = modal;
+    this.container = document.getElementById('gallery-grid');
+    this.observer = null;
+    this._setupLazyLoader();
+  }
+
+  _setupLazyLoader() {
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          const src = img.dataset.src;
+          if (src) {
+            img.src = src;
+            img.onload = () => img.setAttribute('data-loaded', 'true');
+            img.onerror = () => {
+              img.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" fill="%23222"><rect width="400" height="300"/><text x="200" y="150" text-anchor="middle" fill="%23555" font-size="16">Image unavailable</text></svg>';
+              img.setAttribute('data-loaded', 'true');
+            };
+            delete img.dataset.src;
+          }
+          this.observer.unobserve(img);
+        }
+      });
+    }, { rootMargin: '200px' });
+  }
+
+  render(artworks) {
+    const list = artworks || this.store.filteredArtworks;
+
+    if (list.length === 0) {
+      this.container.innerHTML = `
+        <div class="gallery-empty">
+          <div class="gallery-empty__icon">🍃</div>
+          <div class="gallery-empty__title">No artworks match your filters</div>
+          <div class="gallery-empty__text">Try selecting different elements or switching between AND/OR mode.</div>
+        </div>`;
+      return;
+    }
+
+    this.container.innerHTML = list.map((aw, i) => {
+      const artist = this.store.getArtist(aw.artistId);
+      const imgUrl = aw.imageUrls?.[0] || '';
+      const hasImage = aw.imageUrls && aw.imageUrls.length > 0;
+      const elementDots = (aw.elements || []).map(elId => {
+        const el = this.store.getElement(elId);
+        return el ? `<span class="gallery-card__element-dot" style="background:${el.color}" title="${el.label}"></span>` : '';
+      }).join('');
+
+      const imageContent = hasImage
+        ? `<img class="gallery-card__image" data-src="${imgUrl}" data-loaded="false" alt="${aw.title}" loading="lazy">`
+        : `<div class="gallery-card__placeholder">
+            <div class="gallery-card__placeholder-icon">${(aw.elements || []).map(elId => { const el = this.store.getElement(elId); return el ? el.icon : ''; }).join(' ') || '🎨'}</div>
+            <div class="gallery-card__placeholder-title">${aw.title}</div>
+            <div class="gallery-card__placeholder-artist">${artist?.name || ''}, ${aw.year}</div>
+            ${aw.referenceUrl ? `<a href="${aw.referenceUrl}" target="_blank" rel="noopener" class="gallery-card__placeholder-link" onclick="event.stopPropagation()">View artwork &rarr;</a>` : ''}
+          </div>`;
+
+      return `<div class="gallery-card fade-in stagger${!hasImage ? ' gallery-card--no-image' : ''}" data-artwork-id="${aw.id}" style="animation-delay:${Math.min(i * 0.04, 1.2)}s">
+        <div class="gallery-card__image-wrap">
+          ${imageContent}
+        </div>
+        <div class="gallery-card__overlay">
+          <div class="gallery-card__title">${aw.title}</div>
+          <div class="gallery-card__artist">${artist?.name || 'Unknown'}</div>
+          <div class="gallery-card__year">${aw.year}</div>
+          <div class="gallery-card__elements">${elementDots}</div>
+        </div>
+      </div>`;
+    }).join('');
+
+    // Observe all lazy images
+    this.container.querySelectorAll('img[data-src]').forEach(img => {
+      this.observer.observe(img);
+    });
+
+    // Click handler via delegation
+    this.container.onclick = (e) => {
+      const card = e.target.closest('.gallery-card');
+      if (card) {
+        this.modal.open(card.dataset.artworkId);
+      }
+    };
+  }
+
+  listen() {
+    document.addEventListener('dataFiltered', (e) => {
+      this.render(e.detail.artworks);
+    });
+  }
+}
+
+// ============================================================
+// Slideshow — full-screen view with navigation
+// ============================================================
+class Slideshow {
+  constructor(store, modal) {
+    this.store = store;
+    this.modal = modal;
+    this.el = document.getElementById('slideshow');
+    this.imageEl = document.getElementById('slideshow-image');
+    this.titleEl = document.getElementById('slideshow-title');
+    this.artistEl = document.getElementById('slideshow-artist');
+    this.counterEl = document.getElementById('slideshow-counter');
+    this.progressEl = document.getElementById('slideshow-progress');
+    this.index = 0;
+    this.active = false;
+    this._bindEvents();
+  }
+
+  _bindEvents() {
+    document.getElementById('slideshow-close').addEventListener('click', () => this.close());
+    document.getElementById('slideshow-prev').addEventListener('click', () => this.prev());
+    document.getElementById('slideshow-next').addEventListener('click', () => this.next());
+
+    this.imageEl.addEventListener('click', () => {
+      const artworks = this.store.filteredArtworks;
+      if (artworks[this.index]) {
+        this.modal.open(artworks[this.index].id);
+      }
+    });
+    this.imageEl.style.cursor = 'pointer';
+
+    document.addEventListener('keydown', (e) => {
+      if (!this.active) return;
+      if (e.key === 'Escape') this.close();
+      if (e.key === 'ArrowLeft') this.prev();
+      if (e.key === 'ArrowRight') this.next();
+    });
+  }
+
+  open(startIndex = 0) {
+    this.index = startIndex;
+    this.active = true;
+    this.el.classList.add('active');
+    document.body.classList.add('no-scroll');
+    this._show();
+  }
+
+  close() {
+    this.active = false;
+    this.el.classList.remove('active');
+    document.body.classList.remove('no-scroll');
+  }
+
+  prev() {
+    const len = this.store.filteredArtworks.length;
+    if (len === 0) return;
+    this.index = (this.index - 1 + len) % len;
+    this._transition();
+  }
+
+  next() {
+    const len = this.store.filteredArtworks.length;
+    if (len === 0) return;
+    this.index = (this.index + 1) % len;
+    this._transition();
+  }
+
+  _transition() {
+    this.imageEl.classList.add('transitioning');
+    setTimeout(() => {
+      this._show();
+      this.imageEl.classList.remove('transitioning');
+    }, 300);
+  }
+
+  _show() {
+    const artworks = this.store.filteredArtworks;
+    const aw = artworks[this.index];
+    if (!aw) return;
+    const artist = this.store.getArtist(aw.artistId);
+    const imgUrl = aw.imageUrls?.[0] || '';
+    this.imageEl.src = imgUrl;
+    this.imageEl.alt = aw.title;
+    this.imageEl.style.display = imgUrl ? '' : 'none';
+    this.titleEl.textContent = aw.title;
+    this.artistEl.textContent = `${artist?.name || 'Unknown'}, ${aw.year}`;
+    this.counterEl.textContent = `${this.index + 1} / ${artworks.length}`;
+    const pct = artworks.length > 1 ? ((this.index) / (artworks.length - 1)) * 100 : 100;
+    this.progressEl.style.width = pct + '%';
+  }
+
+  listen() {
+    document.addEventListener('dataFiltered', () => {
+      if (this.active) {
+        this.index = 0;
+        this._show();
+      }
+    });
+  }
+}
+
+// ============================================================
+// ArtworkModal — detail overlay with carousel
+// ============================================================
+class ArtworkModal {
+  constructor(store) {
+    this.store = store;
+    this.backdrop = document.getElementById('modal-backdrop');
+    this.modal = document.getElementById('artwork-modal');
+    this.scrollEl = document.getElementById('modal-scroll');
+    this.currentArtwork = null;
+    this.carouselIndex = 0;
+    this._bindEvents();
+  }
+
+  _bindEvents() {
+    document.getElementById('modal-close').addEventListener('click', () => this.close());
+    this.backdrop.addEventListener('click', () => this.close());
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && this.modal.classList.contains('active')) {
+        this.close();
+      }
+    });
+  }
+
+  open(artworkId) {
+    const aw = this.store.getArtwork(artworkId);
+    if (!aw) return;
+    this.currentArtwork = aw;
+    this.carouselIndex = 0;
+    const artist = this.store.getArtist(aw.artistId);
+
+    const images = aw.imageUrls || [];
+    const hasMultipleImages = images.length > 1;
+
+    let carouselHTML;
+    if (images.length > 0) {
+      carouselHTML = `<div class="modal__carousel">
+        <div class="modal__carousel-track" id="carousel-track">
+          ${images.map(url => `<div class="modal__carousel-slide"><img src="${url}" alt="${aw.title}"></div>`).join('')}
+        </div>
+        ${hasMultipleImages ? `
+          <button class="modal__carousel-arrow modal__carousel-arrow--prev" id="carousel-prev">&#8249;</button>
+          <button class="modal__carousel-arrow modal__carousel-arrow--next" id="carousel-next">&#8250;</button>
+          <div class="modal__carousel-dots" id="carousel-dots">
+            ${images.map((_, i) => `<button class="modal__carousel-dot${i === 0 ? ' active' : ''}" data-index="${i}"></button>`).join('')}
+          </div>
+        ` : ''}
+      </div>`;
+    } else {
+      const elIcons = (aw.elements || []).map(elId => { const el = this.store.getElement(elId); return el ? el.icon : ''; }).join(' ');
+      carouselHTML = `<div class="modal__no-image">
+        <div class="modal__no-image-icon">${elIcons || '🎨'}</div>
+        <div class="modal__no-image-text">No photograph available</div>
+        ${aw.referenceUrl ? `<a href="${aw.referenceUrl}" target="_blank" rel="noopener" class="modal__reference-link">View on artist's website &rarr;</a>` : ''}
+      </div>`;
+    }
+
+    const elementsHTML = (aw.elements || []).map(elId => {
+      const el = this.store.getElement(elId);
+      return el ? `<span class="modal__element-chip"><span>${el.icon}</span> ${el.label}</span>` : '';
+    }).join('');
+
+    const materialsHTML = (aw.materials || []).map(m => `<span class="modal__element-chip">${m}</span>`).join('');
+
+    const exhibitionsHTML = (aw.exhibitions || []).map(ex =>
+      `<div class="modal__exhibition-item">${ex}</div>`
+    ).join('');
+
+    const videosHTML = (aw.videoLinks || []).filter(v => v).map(v =>
+      `<a href="${v}" target="_blank" rel="noopener" class="modal__video-link">
+        <span class="modal__video-link-icon">&#9654;</span> Watch Video
+      </a>`
+    ).join('');
+
+    this.scrollEl.innerHTML = `
+      ${carouselHTML}
+      <div class="modal__details">
+        <h2 class="modal__title">${aw.title}</h2>
+        <div class="modal__meta">
+          <span class="modal__artist">${artist?.name || 'Unknown'}</span>
+          <span class="modal__year">${aw.year}</span>
+        </div>
+        <p class="modal__description">${aw.description || ''}</p>
+        <div class="modal__fields-grid">
+          ${aw.location ? `<div class="modal__field"><div class="modal__field-label">Location</div><div class="modal__field-value">${aw.location}</div></div>` : ''}
+          ${aw.dimensions ? `<div class="modal__field"><div class="modal__field-label">Dimensions</div><div class="modal__field-value">${aw.dimensions}</div></div>` : ''}
+        </div>
+        ${materialsHTML ? `<div class="modal__field"><div class="modal__field-label">Materials</div><div class="modal__elements">${materialsHTML}</div></div>` : ''}
+        ${elementsHTML ? `<div class="modal__field"><div class="modal__field-label">Elements</div><div class="modal__elements">${elementsHTML}</div></div>` : ''}
+        ${exhibitionsHTML ? `<div><div class="modal__section-title">Exhibitions</div><div class="modal__exhibitions">${exhibitionsHTML}</div></div>` : ''}
+        ${videosHTML ? `<div><div class="modal__section-title">Videos</div><div class="modal__video-links">${videosHTML}</div></div>` : ''}
+        ${aw.referenceUrl ? `<div><div class="modal__section-title">Reference</div><a href="${aw.referenceUrl}" target="_blank" rel="noopener" class="modal__reference-link">View on artist's website &rarr;</a></div>` : ''}
+      </div>
+    `;
+
+    // Carousel events
+    if (hasMultipleImages) {
+      document.getElementById('carousel-prev')?.addEventListener('click', () => this._carouselGo(this.carouselIndex - 1));
+      document.getElementById('carousel-next')?.addEventListener('click', () => this._carouselGo(this.carouselIndex + 1));
+      document.getElementById('carousel-dots')?.addEventListener('click', (e) => {
+        const dot = e.target.closest('.modal__carousel-dot');
+        if (dot) this._carouselGo(parseInt(dot.dataset.index));
+      });
+    }
+
+    this.backdrop.classList.add('active');
+    this.modal.classList.add('active');
+    document.body.classList.add('no-scroll');
+  }
+
+  _carouselGo(index) {
+    const images = this.currentArtwork?.imageUrls || [];
+    if (images.length === 0) return;
+    this.carouselIndex = ((index % images.length) + images.length) % images.length;
+    const track = document.getElementById('carousel-track');
+    if (track) track.style.transform = `translateX(-${this.carouselIndex * 100}%)`;
+    document.querySelectorAll('#carousel-dots .modal__carousel-dot').forEach((dot, i) => {
+      dot.classList.toggle('active', i === this.carouselIndex);
+    });
+  }
+
+  close() {
+    this.backdrop.classList.remove('active');
+    this.modal.classList.remove('active');
+    document.body.classList.remove('no-scroll');
+    this.currentArtwork = null;
+  }
+}
+
+// ============================================================
+// ViewToggle — grid/slideshow switching
+// ============================================================
+class ViewToggle {
+  constructor(gallery, slideshow) {
+    this.gallery = gallery;
+    this.slideshow = slideshow;
+    this.container = document.getElementById('view-toggle');
+    this.currentView = 'grid';
+    this._bindEvents();
+  }
+
+  _bindEvents() {
+    this.container.addEventListener('click', (e) => {
+      const btn = e.target.closest('.view-toggle__btn');
+      if (!btn) return;
+      const view = btn.dataset.view;
+      if (view === this.currentView) return;
+      this.currentView = view;
+      this.container.querySelectorAll('.view-toggle__btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      if (view === 'slideshow') {
+        this.slideshow.open(0);
+      } else {
+        this.slideshow.close();
+      }
+    });
+  }
+}
+
+// ============================================================
+// App — initialization orchestrator
+// ============================================================
+class App {
+  async init() {
+    // Show loading
+    const loadingEl = document.getElementById('loading');
+    const galleryEl = document.getElementById('gallery-grid');
+    loadingEl.style.display = '';
+    loadingEl.innerHTML = Array.from({ length: 8 }, (_, i) =>
+      `<div class="skeleton-card">
+        <div class="skeleton-card__image" style="height:${200 + (i % 3) * 80}px"></div>
+        <div class="skeleton-card__body">
+          <div class="skeleton-line skeleton-line--medium"></div>
+          <div class="skeleton-line skeleton-line--short"></div>
+        </div>
+      </div>`
+    ).join('');
+    galleryEl.style.display = 'none';
+
+    try {
+      // Load data
+      const store = new DataStore();
+      await store.load();
+
+      // Create components
+      const modal = new ArtworkModal(store);
+      const filterBar = new FilterBar(store);
+      const gallery = new GalleryGrid(store, modal);
+      const slideshow = new Slideshow(store, modal);
+      const viewToggle = new ViewToggle(gallery, slideshow);
+      // Render
+      filterBar.render();
+      gallery.render();
+      gallery.listen();
+      slideshow.listen();
+
+      // Header scroll effect
+      window.addEventListener('scroll', () => {
+        document.getElementById('header').classList.toggle('scrolled', window.scrollY > 10);
+      });
+
+      // Remove loading, show gallery
+      loadingEl.style.display = 'none';
+      galleryEl.style.display = '';
+    } catch (err) {
+      loadingEl.innerHTML = `<div class="gallery-empty">
+        <div class="gallery-empty__icon">&#9888;</div>
+        <div class="gallery-empty__title">Failed to load</div>
+        <div class="gallery-empty__text">${err.message}. Make sure you're serving this via HTTP (not file://).</div>
+      </div>`;
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => new App().init());
+</script>
+</body>
+</html>

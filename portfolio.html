@@ -1,0 +1,4613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nature Artists Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+/* ============================================================
+   NATURE ARTISTS PORTFOLIO — Dark Gallery Theme
+   ============================================================ */
+
+/* --- 1. BASE / RESET --- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #0a0a0a;
+  color: #e0e0e0;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+  font-size: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+input, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+
+/* --- CUSTOM SCROLLBAR --- */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2a2a2a;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
+::-webkit-scrollbar-corner {
+  background: #0a0a0a;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2a2a2a #0a0a0a;
+}
+
+
+/* --- 2. HEADER — Fixed Top Bar with Glass Morphism --- */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 64px;
+  background: rgba(10, 10, 10, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(42, 42, 42, 0.6);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header.scrolled {
+  background: rgba(10, 10, 10, 0.88);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+}
+
+.header__title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #e0e0e0;
+  white-space: nowrap;
+}
+
+.header__title span {
+  color: #888;
+  font-weight: 400;
+  font-size: 0.85em;
+}
+
+.header__controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(42, 42, 42, 0.5);
+  border: 1px solid #2a2a2a;
+  color: #888;
+  font-size: 1.15rem;
+  transition: all 0.25s ease;
+}
+
+.header__btn:hover {
+  background: rgba(42, 42, 42, 0.9);
+  color: #e0e0e0;
+  border-color: #444;
+}
+
+.header__btn.active {
+  background: rgba(255, 255, 255, 0.1);
+  color: #e0e0e0;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.chat-toggle-btn {
+  position: relative;
+}
+
+.chat-toggle-btn .badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 8px;
+  height: 8px;
+  background: #4a9eff;
+  border-radius: 50%;
+  border: 2px solid #0a0a0a;
+}
+
+
+/* --- 3. FILTER BAR — Horizontal Scrollable Chips --- */
+
+.filter-bar {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(42, 42, 42, 0.4);
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.filter-bar::-webkit-scrollbar {
+  height: 0;
+  display: none;
+}
+
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border-radius: 100px;
+  background: rgba(42, 42, 42, 0.4);
+  border: 1px solid #2a2a2a;
+  color: #888;
+  font-size: 0.8rem;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.filter-chip:hover {
+  background: rgba(42, 42, 42, 0.7);
+  color: #e0e0e0;
+  border-color: #444;
+}
+
+.filter-chip .chip-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* Element-specific active colors */
+.filter-chip.active {
+  color: #fff;
+  border-color: transparent;
+}
+
+.filter-chip.active[data-element="earth"] {
+  background: rgba(139, 119, 75, 0.5);
+  border-color: rgba(139, 119, 75, 0.7);
+  box-shadow: 0 0 12px rgba(139, 119, 75, 0.25);
+}
+
+.filter-chip.active[data-element="water"] {
+  background: rgba(74, 144, 226, 0.45);
+  border-color: rgba(74, 144, 226, 0.65);
+  box-shadow: 0 0 12px rgba(74, 144, 226, 0.25);
+}
+
+.filter-chip.active[data-element="fire"] {
+  background: rgba(226, 109, 60, 0.45);
+  border-color: rgba(226, 109, 60, 0.65);
+  box-shadow: 0 0 12px rgba(226, 109, 60, 0.25);
+}
+
+.filter-chip.active[data-element="air"] {
+  background: rgba(160, 200, 220, 0.35);
+  border-color: rgba(160, 200, 220, 0.55);
+  box-shadow: 0 0 12px rgba(160, 200, 220, 0.2);
+}
+
+.filter-chip.active[data-element="flora"] {
+  background: rgba(80, 160, 80, 0.4);
+  border-color: rgba(80, 160, 80, 0.6);
+  box-shadow: 0 0 12px rgba(80, 160, 80, 0.2);
+}
+
+.filter-chip.active[data-element="light"] {
+  background: rgba(240, 210, 100, 0.35);
+  border-color: rgba(240, 210, 100, 0.55);
+  box-shadow: 0 0 12px rgba(240, 210, 100, 0.2);
+}
+
+.filter-chip.active[data-element="stone"] {
+  background: rgba(140, 140, 140, 0.4);
+  border-color: rgba(140, 140, 140, 0.6);
+  box-shadow: 0 0 12px rgba(140, 140, 140, 0.2);
+}
+
+.filter-chip.active[data-element="ice"] {
+  background: rgba(160, 210, 235, 0.35);
+  border-color: rgba(160, 210, 235, 0.55);
+  box-shadow: 0 0 12px rgba(160, 210, 235, 0.2);
+}
+
+.filter-divider {
+  width: 1px;
+  height: 24px;
+  background: #2a2a2a;
+  flex-shrink: 0;
+}
+
+.filter-logic-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  border-radius: 100px;
+  background: rgba(42, 42, 42, 0.3);
+  border: 1px solid #2a2a2a;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.filter-logic-toggle button {
+  padding: 6px 14px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #666;
+  transition: all 0.25s ease;
+}
+
+.filter-logic-toggle button.active {
+  background: rgba(255, 255, 255, 0.08);
+  color: #e0e0e0;
+}
+
+.filter-clear-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #666;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.filter-clear-btn:hover {
+  color: #e26d3c;
+}
+
+.filter-count {
+  font-size: 0.75rem;
+  color: #666;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;
+  padding-left: 12px;
+}
+
+
+/* --- 4. GALLERY GRID — CSS Masonry via column-count --- */
+
+.main-content {
+  padding-top: 128px; /* header 64px + filter bar ~64px */
+  min-height: 100vh;
+  transition: padding-right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.main-content.chat-open {
+  padding-right: 400px;
+}
+
+.gallery {
+  padding: 24px;
+  column-count: 1;
+  column-gap: 16px;
+  transition: opacity 0.35s ease;
+}
+
+.gallery.loading {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.gallery-card {
+  break-inside: avoid;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.35s ease,
+              border-color 0.3s ease;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.gallery-card:hover {
+  transform: scale(1.02) translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5),
+              0 0 20px rgba(255, 255, 255, 0.03);
+  border-color: #3a3a3a;
+}
+
+.gallery-card__image-wrap {
+  position: relative;
+  overflow: hidden;
+  background: #111;
+}
+
+.gallery-card__image {
+  width: 100%;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              filter 0.6s ease;
+}
+
+.gallery-card:hover .gallery-card__image {
+  transform: scale(1.05);
+}
+
+.gallery-card__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40px 16px 16px;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.4) 60%,
+    transparent 100%
+  );
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transform: translateY(4px);
+  opacity: 0;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+.gallery-card:hover .gallery-card__overlay {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.gallery-card__title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.3;
+}
+
+.gallery-card__artist {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: 400;
+}
+
+.gallery-card__year {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.gallery-card__elements {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.gallery-card__element-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+/* Persistent overlay on mobile since no hover */
+@media (hover: none) {
+  .gallery-card__overlay {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+/* --- NO-IMAGE PLACEHOLDER CARDS --- */
+
+.gallery-card--no-image .gallery-card__image-wrap {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gallery-card--no-image .gallery-card__overlay {
+  opacity: 0;
+}
+
+.gallery-card--no-image:hover .gallery-card__overlay {
+  opacity: 0;
+}
+
+.gallery-card__placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 32px 20px;
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+}
+
+.gallery-card__placeholder-icon {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+  filter: grayscale(0.2);
+}
+
+.gallery-card__placeholder-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #e0e0e0;
+  margin-bottom: 6px;
+}
+
+.gallery-card__placeholder-artist {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 16px;
+}
+
+.gallery-card__placeholder-link {
+  display: inline-block;
+  font-size: 0.8rem;
+  color: #7ec8e3;
+  text-decoration: none;
+  padding: 6px 16px;
+  border: 1px solid rgba(126, 200, 227, 0.3);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.gallery-card__placeholder-link:hover {
+  background: rgba(126, 200, 227, 0.1);
+  border-color: rgba(126, 200, 227, 0.6);
+  color: #a0dcf0;
+}
+
+/* Modal no-image state */
+
+.modal__no-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 250px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  border-radius: 12px;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.modal__no-image-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.modal__no-image-text {
+  color: #888;
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+}
+
+.modal__reference-link {
+  display: inline-block;
+  color: #7ec8e3;
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 8px 20px;
+  border: 1px solid rgba(126, 200, 227, 0.3);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.modal__reference-link:hover {
+  background: rgba(126, 200, 227, 0.1);
+  border-color: rgba(126, 200, 227, 0.6);
+}
+
+
+/* --- IMAGE LAZY LOADING — Blur-up placeholder --- */
+
+.gallery-card__image.lazyload,
+.gallery-card__image.lazyloading {
+  filter: blur(20px);
+  transform: scale(1.1);
+  transition: filter 0.8s ease, transform 0.8s ease;
+}
+
+.gallery-card__image.lazyloaded {
+  filter: blur(0);
+  transform: scale(1);
+}
+
+.gallery-card__image[data-loaded="false"] {
+  filter: blur(20px);
+  transform: scale(1.1);
+}
+
+.gallery-card__image[data-loaded="true"] {
+  filter: blur(0);
+  transform: scale(1);
+  transition: filter 0.8s ease, transform 0.8s ease;
+}
+
+.image-placeholder {
+  position: absolute;
+  inset: 0;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-placeholder::after {
+  content: '';
+  width: 32px;
+  height: 32px;
+  border: 2px solid #2a2a2a;
+  border-top-color: #555;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+
+/* --- 5. SLIDESHOW — Full-screen overlay --- */
+
+.slideshow {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.slideshow.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.slideshow__image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 80px 100px;
+}
+
+.slideshow__image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+  transition: opacity 0.4s ease;
+  user-select: none;
+}
+
+.slideshow__image.transitioning {
+  opacity: 0;
+}
+
+.slideshow__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #e0e0e0;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 210;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.slideshow__close:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: scale(1.1);
+}
+
+.slideshow__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  color: #e0e0e0;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 210;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.slideshow__arrow:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.slideshow__arrow:active {
+  transform: translateY(-50%) scale(0.94);
+}
+
+.slideshow__arrow--prev {
+  left: 20px;
+}
+
+.slideshow__arrow--next {
+  right: 20px;
+}
+
+.slideshow__info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40px 80px 28px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.slideshow__info-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.slideshow__title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.slideshow__artist {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.slideshow__counter {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.35);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.slideshow__progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.3);
+  transition: width 0.4s ease;
+}
+
+
+/* --- 6. ARTWORK MODAL — Detail overlay panel --- */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  z-index: 151;
+  width: 90vw;
+  max-width: 900px;
+  max-height: 90vh;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 16px;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease,
+              visibility 0.3s ease,
+              transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.modal__scroll {
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+.modal__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #e0e0e0;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.modal__close:hover {
+  background: rgba(0, 0, 0, 0.7);
+  transform: scale(1.1);
+}
+
+/* Carousel */
+.modal__carousel {
+  position: relative;
+  width: 100%;
+  background: #111;
+  overflow: hidden;
+}
+
+.modal__carousel-track {
+  display: flex;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal__carousel-slide {
+  min-width: 100%;
+  position: relative;
+}
+
+.modal__carousel-slide img {
+  width: 100%;
+  max-height: 500px;
+  object-fit: contain;
+  background: #111;
+}
+
+.modal__carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  color: #e0e0e0;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s ease;
+  z-index: 3;
+}
+
+.modal__carousel-arrow:hover {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.modal__carousel-arrow--prev {
+  left: 12px;
+}
+
+.modal__carousel-arrow--next {
+  right: 12px;
+}
+
+.modal__carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background: #1a1a1a;
+}
+
+.modal__carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #333;
+  transition: background 0.25s ease, transform 0.25s ease;
+  cursor: pointer;
+}
+
+.modal__carousel-dot.active {
+  background: #e0e0e0;
+  transform: scale(1.2);
+}
+
+/* Details */
+.modal__details {
+  padding: 28px 32px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modal__title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.modal__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+
+.modal__artist {
+  font-size: 1rem;
+  color: #e0e0e0;
+  font-weight: 500;
+}
+
+.modal__year {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.modal__description {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #bbb;
+}
+
+.modal__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.modal__field-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #666;
+}
+
+.modal__field-value {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.modal__fields-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.modal__elements {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.modal__element-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 14px;
+  border-radius: 100px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #2a2a2a;
+  color: #bbb;
+}
+
+.modal__section-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.05rem;
+  color: #e0e0e0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #2a2a2a;
+  margin-bottom: 4px;
+}
+
+.modal__exhibitions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal__exhibition-item {
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid #222;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  color: #bbb;
+  transition: border-color 0.25s ease;
+}
+
+.modal__exhibition-item:hover {
+  border-color: #3a3a3a;
+}
+
+.modal__exhibition-name {
+  font-weight: 600;
+  color: #e0e0e0;
+}
+
+.modal__exhibition-detail {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 2px;
+}
+
+.modal__video-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal__video-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  color: #aaa;
+  transition: all 0.25s ease;
+}
+
+.modal__video-link:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: #444;
+  color: #e0e0e0;
+}
+
+.modal__video-link-icon {
+  font-size: 1.1rem;
+  color: #e26d3c;
+}
+
+
+/* --- 7. VIEW TOGGLE --- */
+
+.view-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  background: rgba(42, 42, 42, 0.3);
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  padding: 3px;
+}
+
+.view-toggle__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  color: #666;
+  font-size: 1rem;
+  transition: all 0.25s ease;
+}
+
+.view-toggle__btn:hover {
+  color: #aaa;
+}
+
+.view-toggle__btn.active {
+  background: rgba(255, 255, 255, 0.08);
+  color: #e0e0e0;
+}
+
+
+/* --- 8. CHAT PANEL — Sliding sidebar --- */
+
+.chat-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 400px;
+  z-index: 120;
+  background: #111;
+  border-left: 1px solid #2a2a2a;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: -8px 0 40px rgba(0, 0, 0, 0);
+}
+
+.chat-panel.open {
+  transform: translateX(0);
+  box-shadow: -8px 0 40px rgba(0, 0, 0, 0.4);
+}
+
+.chat-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #2a2a2a;
+  background: rgba(17, 17, 17, 0.95);
+  flex-shrink: 0;
+}
+
+.chat-panel__title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #e0e0e0;
+}
+
+.chat-panel__close {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(42, 42, 42, 0.4);
+  border: 1px solid #2a2a2a;
+  color: #888;
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+}
+
+.chat-panel__close:hover {
+  background: rgba(42, 42, 42, 0.8);
+  color: #e0e0e0;
+  border-color: #444;
+}
+
+/* API Key Input */
+.chat-panel__api-key {
+  padding: 16px 20px;
+  border-bottom: 1px solid #2a2a2a;
+  flex-shrink: 0;
+}
+
+.chat-panel__api-key label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.chat-panel__api-key-input {
+  width: 100%;
+  padding: 10px 14px;
+  background: rgba(42, 42, 42, 0.3);
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  color: #e0e0e0;
+  font-size: 0.85rem;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.chat-panel__api-key-input:focus {
+  border-color: #4a9eff;
+  background: rgba(42, 42, 42, 0.5);
+}
+
+.chat-panel__api-key-input::placeholder {
+  color: #555;
+}
+
+/* Messages */
+.chat-panel__messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chat-message {
+  display: flex;
+  flex-direction: column;
+  max-width: 85%;
+  animation: fadeSlideUp 0.3s ease;
+}
+
+.chat-message--user {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.chat-message--assistant {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+.chat-message__bubble {
+  padding: 12px 16px;
+  border-radius: 16px;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  word-break: break-word;
+}
+
+.chat-message--user .chat-message__bubble {
+  background: #1a3a5c;
+  color: #d0e4ff;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-message--assistant .chat-message__bubble {
+  background: #1e1e1e;
+  color: #ccc;
+  border: 1px solid #2a2a2a;
+  border-bottom-left-radius: 4px;
+}
+
+.chat-message__time {
+  font-size: 0.68rem;
+  color: #555;
+  margin-top: 4px;
+  padding: 0 4px;
+}
+
+/* Feedback buttons */
+.chat-message__feedback {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.chat-message:hover .chat-message__feedback {
+  opacity: 1;
+}
+
+.chat-message__feedback-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.chat-message__feedback-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #aaa;
+}
+
+.chat-message__feedback-btn.liked {
+  color: #4a9eff;
+}
+
+.chat-message__feedback-btn.disliked {
+  color: #e26d3c;
+}
+
+/* Suggestions */
+.chat-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 4px 20px 12px;
+  flex-shrink: 0;
+}
+
+.chat-suggestion-chip {
+  padding: 7px 14px;
+  border-radius: 100px;
+  background: rgba(42, 42, 42, 0.3);
+  border: 1px solid #2a2a2a;
+  font-size: 0.78rem;
+  color: #888;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.chat-suggestion-chip:hover {
+  background: rgba(42, 42, 42, 0.6);
+  border-color: #444;
+  color: #e0e0e0;
+}
+
+/* Input area */
+.chat-panel__input-area {
+  padding: 16px 20px;
+  border-top: 1px solid #2a2a2a;
+  background: rgba(17, 17, 17, 0.95);
+  flex-shrink: 0;
+}
+
+.chat-panel__input-wrap {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  background: rgba(42, 42, 42, 0.25);
+  border: 1px solid #2a2a2a;
+  border-radius: 14px;
+  padding: 8px 12px;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.chat-panel__input-wrap:focus-within {
+  border-color: #4a9eff;
+  background: rgba(42, 42, 42, 0.4);
+}
+
+.chat-panel__textarea {
+  flex: 1;
+  resize: none;
+  min-height: 22px;
+  max-height: 120px;
+  padding: 4px 0;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  color: #e0e0e0;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.chat-panel__textarea::placeholder {
+  color: #555;
+}
+
+.chat-panel__send-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #4a9eff;
+  color: #fff;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.25s ease, transform 0.2s ease, opacity 0.25s ease;
+}
+
+.chat-panel__send-btn:hover {
+  background: #3a8aee;
+  transform: scale(1.05);
+}
+
+.chat-panel__send-btn:active {
+  transform: scale(0.95);
+}
+
+.chat-panel__send-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+}
+
+
+/* --- 9. LOADING STATES --- */
+
+/* Skeleton cards */
+.skeleton-card {
+  break-inside: avoid;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+}
+
+.skeleton-card__image {
+  width: 100%;
+  background: #1e1e1e;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-card__image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.03) 40%,
+    rgba(255, 255, 255, 0.06) 50%,
+    rgba(255, 255, 255, 0.03) 60%,
+    transparent 100%
+  );
+  animation: shimmer 1.8s ease infinite;
+}
+
+.skeleton-card__body {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.skeleton-line {
+  height: 12px;
+  background: #222;
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.04) 50%,
+    transparent 100%
+  );
+  animation: shimmer 1.8s ease infinite;
+}
+
+.skeleton-line--short {
+  width: 60%;
+}
+
+.skeleton-line--medium {
+  width: 80%;
+}
+
+/* Chat spinner */
+.chat-spinner {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 0;
+}
+
+.chat-spinner__dot {
+  width: 6px;
+  height: 6px;
+  background: #555;
+  border-radius: 50%;
+  animation: chatBounce 1.2s ease infinite;
+}
+
+.chat-spinner__dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.chat-spinner__dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* General spinner */
+.spinner {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #2a2a2a;
+  border-top-color: #888;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+.spinner--small {
+  width: 16px;
+  height: 16px;
+  border-width: 1.5px;
+}
+
+.spinner--large {
+  width: 40px;
+  height: 40px;
+  border-width: 3px;
+}
+
+
+/* --- 10. TRANSITIONS / ANIMATIONS --- */
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeSlideUp 0.4s ease forwards;
+}
+
+.stagger:nth-child(1)  { animation-delay: 0.00s; }
+.stagger:nth-child(2)  { animation-delay: 0.05s; }
+.stagger:nth-child(3)  { animation-delay: 0.10s; }
+.stagger:nth-child(4)  { animation-delay: 0.15s; }
+.stagger:nth-child(5)  { animation-delay: 0.20s; }
+.stagger:nth-child(6)  { animation-delay: 0.25s; }
+.stagger:nth-child(7)  { animation-delay: 0.30s; }
+.stagger:nth-child(8)  { animation-delay: 0.35s; }
+.stagger:nth-child(9)  { animation-delay: 0.40s; }
+.stagger:nth-child(10) { animation-delay: 0.45s; }
+.stagger:nth-child(11) { animation-delay: 0.50s; }
+.stagger:nth-child(12) { animation-delay: 0.55s; }
+.stagger:nth-child(13) { animation-delay: 0.60s; }
+.stagger:nth-child(14) { animation-delay: 0.65s; }
+.stagger:nth-child(15) { animation-delay: 0.70s; }
+.stagger:nth-child(16) { animation-delay: 0.75s; }
+.stagger:nth-child(17) { animation-delay: 0.80s; }
+.stagger:nth-child(18) { animation-delay: 0.85s; }
+.stagger:nth-child(19) { animation-delay: 0.90s; }
+.stagger:nth-child(20) { animation-delay: 0.95s; }
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes chatBounce {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-6px);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+
+/* Transition utility classes */
+.t-all    { transition: all 0.3s ease; }
+.t-fast   { transition: all 0.15s ease; }
+.t-colors { transition: color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease; }
+
+
+/* --- 11. EMPTY / NO-RESULTS STATE --- */
+
+.gallery-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  text-align: center;
+  gap: 16px;
+}
+
+.gallery-empty__icon {
+  font-size: 3rem;
+  opacity: 0.25;
+}
+
+.gallery-empty__title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.3rem;
+  color: #888;
+}
+
+.gallery-empty__text {
+  font-size: 0.9rem;
+  color: #555;
+  max-width: 360px;
+  line-height: 1.6;
+}
+
+
+/* --- 12. RESPONSIVE — Mobile first breakpoints --- */
+
+/* Mobile (default, up to 767px) */
+@media (max-width: 767px) {
+  .header {
+    padding: 0 16px;
+    height: 56px;
+  }
+
+  .header__title {
+    font-size: 1.2rem;
+  }
+
+  .header__title span {
+    display: none;
+  }
+
+  .filter-bar {
+    top: 56px;
+    padding: 10px 16px;
+    gap: 8px;
+  }
+
+  .main-content {
+    padding-top: 110px;
+  }
+
+  .main-content.chat-open {
+    padding-right: 0;
+  }
+
+  .gallery {
+    padding: 16px;
+    column-count: 1;
+    column-gap: 12px;
+  }
+
+  .gallery-card {
+    margin-bottom: 12px;
+  }
+
+  .gallery-card__title {
+    font-size: 0.9rem;
+  }
+
+  /* Slideshow mobile */
+  .slideshow__image-container {
+    padding: 56px 12px 90px;
+  }
+
+  .slideshow__arrow {
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+  }
+
+  .slideshow__arrow--prev {
+    left: 8px;
+  }
+
+  .slideshow__arrow--next {
+    right: 8px;
+  }
+
+  .slideshow__info {
+    padding: 30px 16px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .slideshow__title {
+    font-size: 1.1rem;
+  }
+
+  /* Modal mobile */
+  .modal {
+    width: 100vw;
+    max-width: 100vw;
+    max-height: 100vh;
+    border-radius: 0;
+    top: 0;
+    left: 0;
+    transform: translateY(20px);
+  }
+
+  .modal.active {
+    transform: translateY(0);
+  }
+
+  .modal__scroll {
+    max-height: 100vh;
+  }
+
+  .modal__details {
+    padding: 20px 16px 28px;
+  }
+
+  .modal__title {
+    font-size: 1.35rem;
+  }
+
+  .modal__fields-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  /* Chat panel full-width on mobile */
+  .chat-panel {
+    width: 100%;
+  }
+
+  .chat-suggestions {
+    padding: 4px 16px 10px;
+  }
+
+  .chat-suggestion-chip {
+    font-size: 0.74rem;
+  }
+
+  .filter-count {
+    display: none;
+  }
+}
+
+/* Tablet (768px - 1199px) */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .gallery {
+    column-count: 2;
+    column-gap: 16px;
+    padding: 24px;
+  }
+
+  .chat-panel {
+    width: 360px;
+  }
+
+  .main-content.chat-open {
+    padding-right: 360px;
+  }
+
+  .modal {
+    width: 85vw;
+  }
+}
+
+/* Desktop (1200px+) */
+@media (min-width: 1200px) {
+  .gallery {
+    column-count: 3;
+    column-gap: 20px;
+    padding: 28px 32px;
+  }
+
+  .header {
+    padding: 0 32px;
+  }
+
+  .filter-bar {
+    padding: 12px 32px;
+  }
+
+  .chat-panel {
+    width: 400px;
+  }
+}
+
+/* Wide (1600px+) */
+@media (min-width: 1600px) {
+  .gallery {
+    column-count: 4;
+    column-gap: 22px;
+    padding: 32px 40px;
+  }
+
+  .header {
+    padding: 0 40px;
+  }
+
+  .filter-bar {
+    padding: 12px 40px;
+  }
+}
+
+/* Ultra-wide (2000px+) */
+@media (min-width: 2000px) {
+  .gallery {
+    max-width: 2200px;
+    margin: 0 auto;
+  }
+}
+
+
+/* --- 13. ACCESSIBILITY & REDUCED MOTION --- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid #4a9eff;
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+/* --- 14. SELECTION & MISC --- */
+
+::selection {
+  background: rgba(74, 158, 255, 0.3);
+  color: #fff;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Prevent body scroll when modal/slideshow open */
+body.no-scroll {
+  overflow: hidden;
+}
+
+/* Safe area padding for notched devices */
+@supports (padding: max(0px)) {
+  .header {
+    padding-left: max(24px, env(safe-area-inset-left));
+    padding-right: max(24px, env(safe-area-inset-right));
+  }
+
+  .chat-panel__input-area {
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+  }
+}
+
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <h1 class="header__title">Nature Artists <span>Portfolio</span></h1>
+    <div class="header__controls">
+      <div class="view-toggle" id="view-toggle">
+        <button class="view-toggle__btn active" data-view="grid" title="Grid view">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        </button>
+        <button class="view-toggle__btn" data-view="slideshow" title="Slideshow view">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Filter Bar -->
+  <div class="filter-bar" id="filter-bar"></div>
+
+  <!-- Main Content -->
+  <main class="main-content" id="main-content">
+    <!-- Gallery Grid -->
+    <div class="gallery" id="gallery-grid"></div>
+
+    <!-- Loading Skeleton -->
+    <div class="gallery" id="loading" style="display:none;"></div>
+  </main>
+
+  <!-- Slideshow Overlay -->
+  <div class="slideshow" id="slideshow">
+    <button class="slideshow__close" id="slideshow-close">&times;</button>
+    <button class="slideshow__arrow slideshow__arrow--prev" id="slideshow-prev">&#8249;</button>
+    <div class="slideshow__image-container">
+      <img class="slideshow__image" id="slideshow-image" src="" alt="">
+    </div>
+    <button class="slideshow__arrow slideshow__arrow--next" id="slideshow-next">&#8250;</button>
+    <div class="slideshow__info">
+      <div class="slideshow__info-text">
+        <div class="slideshow__title" id="slideshow-title"></div>
+        <div class="slideshow__artist" id="slideshow-artist"></div>
+      </div>
+      <div class="slideshow__counter" id="slideshow-counter"></div>
+    </div>
+    <div class="slideshow__progress" id="slideshow-progress"></div>
+  </div>
+
+  <!-- Artwork Modal -->
+  <div class="modal-backdrop" id="modal-backdrop"></div>
+  <div class="modal" id="artwork-modal">
+    <button class="modal__close" id="modal-close">&times;</button>
+    <div class="modal__scroll" id="modal-scroll"></div>
+  </div>
+
+
+<script>
+const EMBEDDED_DATA = {
+  "elements": [
+    {
+      "id": "wind",
+      "label": "Wind",
+      "icon": "\ud83c\udf2c\ufe0f",
+      "color": "#7ec8e3"
+    },
+    {
+      "id": "water",
+      "label": "Water",
+      "icon": "\ud83d\udca7",
+      "color": "#4a90d9"
+    },
+    {
+      "id": "light",
+      "label": "Light",
+      "icon": "\u2728",
+      "color": "#f5d76e"
+    },
+    {
+      "id": "earth",
+      "label": "Earth",
+      "icon": "\ud83e\udea8",
+      "color": "#a0785a"
+    },
+    {
+      "id": "fire",
+      "label": "Fire",
+      "icon": "\ud83d\udd25",
+      "color": "#e74c3c"
+    },
+    {
+      "id": "ice",
+      "label": "Ice",
+      "icon": "\u2744\ufe0f",
+      "color": "#b8d4e3"
+    },
+    {
+      "id": "plants",
+      "label": "Plants",
+      "icon": "\ud83c\udf3f",
+      "color": "#27ae60"
+    },
+    {
+      "id": "sky",
+      "label": "Sky",
+      "icon": "\ud83c\udf05",
+      "color": "#e88d3f"
+    },
+    {
+      "id": "stone",
+      "label": "Stone",
+      "icon": "\u26f0\ufe0f",
+      "color": "#8e8e8e"
+    },
+    {
+      "id": "mist",
+      "label": "Mist",
+      "icon": "\ud83c\udf2b\ufe0f",
+      "color": "#b0b0b0"
+    },
+    {
+      "id": "sand",
+      "label": "Sand",
+      "icon": "\ud83c\udfdc\ufe0f",
+      "color": "#d4a96a"
+    },
+    {
+      "id": "sun",
+      "label": "Sunlight",
+      "icon": "\u2600\ufe0f",
+      "color": "#f39c12"
+    },
+    {
+      "id": "metal",
+      "label": "Metal",
+      "icon": "\u2699\ufe0f",
+      "color": "#95a5a6"
+    },
+    {
+      "id": "air",
+      "label": "Air",
+      "icon": "\ud83c\udf90",
+      "color": "#aed6f1"
+    },
+    {
+      "id": "spider",
+      "label": "Spider Silk",
+      "icon": "\ud83d\udd78\ufe0f",
+      "color": "#d5d5d5"
+    },
+    {
+      "id": "fiber",
+      "label": "Fiber",
+      "icon": "\ud83e\uddf5",
+      "color": "#c39bd3"
+    }
+  ],
+  "artists": [
+    {
+      "id": "ned-kahn",
+      "name": "Ned Kahn",
+      "born": 1960,
+      "nationality": "American",
+      "bio": "Ned Kahn creates large-scale artworks that make the invisible forces of nature visible. His wind, water, and mist sculptures respond to their environments in real time, transforming buildings and public spaces into dynamic canvases shaped by weather and atmosphere.",
+      "website": "https://nedkahn.com",
+      "portraitUrl": "https://upload.wikimedia.org/wikipedia/commons/1/17/Liquid_Pixels--Ned_Kahn_%283987033334%29.jpg",
+      "tags": [
+        "wind",
+        "water",
+        "mist"
+      ]
+    },
+    {
+      "id": "olafur-eliasson",
+      "name": "Olafur Eliasson",
+      "born": 1967,
+      "nationality": "Icelandic-Danish",
+      "bio": "Olafur Eliasson uses light, water, and temperature to create immersive environments that challenge perception and connect viewers to the natural world. His installations in major museums and public spaces worldwide explore the boundaries between art, architecture, and nature.",
+      "website": "https://olafureliasson.net",
+      "portraitUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Olafur_Eliasson.jpg",
+      "tags": [
+        "light",
+        "water",
+        "ice",
+        "sun"
+      ]
+    },
+    {
+      "id": "james-turrell",
+      "name": "James Turrell",
+      "born": 1943,
+      "nationality": "American",
+      "bio": "James Turrell works directly with light and space to create artworks that engage viewers with the limits and wonder of human perception. His Roden Crater project in Arizona transforms an extinct volcanic cinder cone into a monumental naked-eye observatory.",
+      "website": "https://jamesturrell.com",
+      "portraitUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b7/James_Turrell_receiving_the_National_Medal_of_Arts.jpg",
+      "tags": [
+        "light",
+        "sky",
+        "sun"
+      ]
+    },
+    {
+      "id": "andy-goldsworthy",
+      "name": "Andy Goldsworthy",
+      "born": 1956,
+      "nationality": "British",
+      "bio": "Andy Goldsworthy creates site-specific sculptures and land art using natural materials found on-site \u2014 leaves, stones, ice, mud, and branches. His ephemeral works celebrate the cycles of growth, decay, and renewal inherent in the natural world.",
+      "website": "https://www.galerie-lelong.com/en/artist/andy-goldsworthy",
+      "portraitUrl": "https://upload.wikimedia.org/wikipedia/commons/6/64/%22Taking_a_Wall_for_a_Walk%22_-_Grizedale_Forest_-_geograph.org.uk_-_36895.jpg",
+      "tags": [
+        "earth",
+        "stone",
+        "ice",
+        "plants"
+      ]
+    },
+    {
+      "id": "nils-udo",
+      "name": "Nils-Udo",
+      "born": 1937,
+      "nationality": "German",
+      "bio": "Nils-Udo is a pioneer of art in nature who has been creating large-scale installations using living plants, earth, and water since the 1960s. His works, often documented only through photography, transform forests and landscapes into dreamlike compositions.",
+      "website": "https://www.nils-udo.com",
+      "portraitUrl": "https://upload.wikimedia.org/wikipedia/commons/7/72/Portrait_Nils-Udo.jpg",
+      "tags": [
+        "plants",
+        "water",
+        "earth"
+      ]
+    },
+    {
+      "id": "robert-smithson",
+      "name": "Robert Smithson",
+      "born": 1938,
+      "nationality": "American",
+      "bio": "Robert Smithson was a pivotal figure in the Land Art movement, best known for Spiral Jetty on the Great Salt Lake. His monumental earthworks and writings redefined the relationship between art, landscape, entropy, and geological time.",
+      "website": "https://www.robertsmithson.com",
+      "portraitUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ae/Robert_Smithson%2C_Spiral_Jetty%2C_1970_%2821237417919%29.jpg",
+      "tags": [
+        "earth",
+        "stone",
+        "water",
+        "sand"
+      ]
+    },
+    {
+      "id": "walter-de-maria",
+      "name": "Walter De Maria",
+      "born": 1935,
+      "nationality": "American",
+      "bio": "Walter De Maria created minimalist sculptures and installations that harness the sublime power of natural phenomena \u2014 particularly lightning, earth, and vast open spaces. His works are experiences of elemental forces at a monumental scale.",
+      "website": "https://www.diaart.org/collection/collection/de-maria-walter",
+      "portraitUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4e/New_York_Earth_Room_in_2024.jpg",
+      "tags": [
+        "earth",
+        "light",
+        "metal"
+      ]
+    },
+    {
+      "id": "jeppe-hein",
+      "name": "Jeppe Hein",
+      "born": 1974,
+      "nationality": "Danish",
+      "bio": "Jeppe Hein creates interactive, playful art installations that use water, fire, mirrors, and movement to engage audiences. His works blur the line between sculpture and social space, inviting direct physical participation.",
+      "website": "https://www.jeppehein.net",
+      "portraitUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c2/Contemporary_Art_Gallery_Jeppe_Hein_Please_Please_Please_Exhibition_2009.jpg",
+      "tags": [
+        "water",
+        "fire",
+        "light"
+      ]
+    },
+    {
+      "id": "janet-echelman",
+      "name": "Janet Echelman",
+      "born": 1966,
+      "nationality": "American",
+      "bio": "Janet Echelman sculpts at the scale of buildings and city blocks using lightweight fiber nets that reshape with the wind. Her billowing, colorful aerial sculptures transform urban landscapes and invite people to look up.",
+      "website": "https://www.echelman.com",
+      "portraitUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Janet_Echelman_Portrait.jpg",
+      "tags": [
+        "wind",
+        "fiber",
+        "light"
+      ]
+    },
+    {
+      "id": "maya-lin",
+      "name": "Maya Lin",
+      "born": 1959,
+      "nationality": "American",
+      "bio": "Maya Lin is an artist and architect whose environmental installations and memorials explore the relationship between landscape and memory. Her work draws on topography, water systems, and natural forms to create contemplative spaces.",
+      "website": "https://www.mayalin.com",
+      "portraitUrl": "https://upload.wikimedia.org/wikipedia/commons/6/63/Maya_Lin%2C_2014_%28cropped%29.jpg",
+      "tags": [
+        "earth",
+        "water",
+        "stone"
+      ]
+    },
+    {
+      "id": "tomas-saraceno",
+      "name": "Tom\u00e1s Saraceno",
+      "born": 1973,
+      "nationality": "Argentine",
+      "bio": "Tom\u00e1s Saraceno builds airborne sculptures and interactive installations inspired by spider webs, soap bubbles, and atmospheric phenomena. His visionary projects explore sustainable flight and interspecies collaboration.",
+      "website": "https://studiotomassaraceno.org",
+      "portraitUrl": "https://upload.wikimedia.org/wikipedia/commons/7/77/Tom%C3%A1s_Saraceno_a_Firenze%2C_21_febbraio_2020%2C_04.jpg",
+      "tags": [
+        "air",
+        "spider",
+        "sun"
+      ]
+    },
+    {
+      "id": "anthony-howe",
+      "name": "Anthony Howe",
+      "born": 1954,
+      "nationality": "American",
+      "bio": "Anthony Howe creates mesmerizing wind-driven kinetic sculptures from stainless steel. His works, which move with the slightest breeze, appear to breathe and pulse like living organisms, blurring the line between engineering and organic form.",
+      "website": "https://www.howeart.net",
+      "portraitUrl": "https://upload.wikimedia.org/wikipedia/commons/5/54/Anthony_Howe_2019.jpg",
+      "tags": [
+        "wind",
+        "metal"
+      ]
+    },
+    {
+      "id": "fujiko-nakaya",
+      "name": "Fujiko Nakaya",
+      "born": 1933,
+      "nationality": "Japanese",
+      "bio": "Fujiko Nakaya is a pioneer of fog sculpture, creating immersive environments from water vapor since the 1970s. Daughter of physicist Ukichiro Nakaya who created the first artificial snowflakes, she became the first artist to sculpt with fog at Expo '70 in Osaka.",
+      "website": "https://www.fujikonakaya.com",
+      "portraitUrl": "https://upload.wikimedia.org/wikipedia/commons/9/97/Fujiko_Nakaya.jpg",
+      "tags": ["mist", "water", "wind"]
+    },
+    {
+      "id": "theo-jansen",
+      "name": "Theo Jansen",
+      "born": 1948,
+      "nationality": "Dutch",
+      "bio": "Theo Jansen creates wind-powered kinetic sculptures called Strandbeests \u2014 'beach animals' built from PVC tubing that walk autonomously on Dutch beaches. He describes them as a new form of artificial life, blurring the boundaries between art, engineering, and biology.",
+      "website": "https://www.strandbeest.com",
+      "portraitUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Jansen_Theo_Hannover.jpg",
+      "tags": ["wind", "sand"]
+    },
+    {
+      "id": "peter-richards",
+      "name": "Peter Richards",
+      "born": 1944,
+      "nationality": "American",
+      "bio": "Peter Richards is a Senior Artist at the Exploratorium in San Francisco, best known for The Wave Organ \u2014 a wave-activated acoustic sculpture on San Francisco Bay. His work explores the intersection of natural forces and sound.",
+      "website": "https://www.exploratorium.edu/arts/artists/peter_richards",
+      "portraitUrl": "",
+      "tags": ["water"]
+    },
+    {
+      "id": "reuben-margolin",
+      "name": "Reuben Margolin",
+      "born": 1969,
+      "nationality": "American",
+      "bio": "Reuben Margolin creates large-scale kinetic wave sculptures using pure mechanics \u2014 cables, pulleys, and motors \u2014 to produce mesmerizing wave motions. His works translate mathematical wave equations into physical, moving forms.",
+      "website": "https://www.reubenmargolin.com",
+      "portraitUrl": "",
+      "tags": ["water", "metal"]
+    },
+    {
+      "id": "nancy-holt",
+      "name": "Nancy Holt",
+      "born": 1938,
+      "nationality": "American",
+      "bio": "Nancy Holt was a pioneering land artist who created monumental site-specific works aligning architecture with astronomical phenomena \u2014 sunlight, starlight, and the rhythms of the cosmos. Her concrete tunnels, pools, and observatories frame the sky itself as the artwork.",
+      "website": "https://holtsmithsonfoundation.org",
+      "portraitUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Nancy_Holt_at_the_Up_and_Under_in_H%C3%A4meenkyr%C3%B6_Finland.jpg",
+      "tags": ["light", "sky", "sun", "earth"]
+    },
+    {
+      "id": "michael-heizer",
+      "name": "Michael Heizer",
+      "born": 1944,
+      "nationality": "American",
+      "bio": "Michael Heizer is one of the founders of the Land Art movement, creating monumental earthworks in the American desert that challenge art to exist beyond galleries at a superhuman scale. His works displace hundreds of thousands of tons of earth and rock.",
+      "website": "https://gagosian.com/artists/michael-heizer/",
+      "portraitUrl": "",
+      "tags": ["earth", "stone", "sand"]
+    },
+    {
+      "id": "agnes-denes",
+      "name": "Agnes Denes",
+      "born": 1931,
+      "nationality": "Hungarian-American",
+      "bio": "Agnes Denes is a visionary conceptual artist whose monumental earthworks and environmental interventions have made her a pioneer of ecological art. Her works plant living systems in unlikely places \u2014 wheat in Manhattan, forests on reclaimed land \u2014 confronting humanity's relationship with nature.",
+      "website": "http://www.agnesdenesstudio.com",
+      "portraitUrl": "https://upload.wikimedia.org/wikipedia/commons/4/40/Agnes_Denes_Portrait.jpg",
+      "tags": ["earth", "plants"]
+    },
+    {
+      "id": "patrick-dougherty",
+      "name": "Patrick Dougherty",
+      "born": 1945,
+      "nationality": "American",
+      "bio": "Patrick Dougherty spent three decades building over 300 monumental sculptures worldwide by weaving freshly cut tree saplings into soaring, organic architectural forms. His ephemeral stickwork installations blur the line between sculpture and shelter.",
+      "website": "http://www.stickwork.net",
+      "portraitUrl": "",
+      "tags": ["plants"]
+    },
+    {
+      "id": "cai-guo-qiang",
+      "name": "Cai Guo-Qiang",
+      "born": 1957,
+      "nationality": "Chinese",
+      "bio": "Cai Guo-Qiang harnesses the elemental power of gunpowder and fire to create explosive artworks that momentarily reshape the sky. His work draws on centuries of Chinese pyrotechnic tradition to transform destruction into transcendent, ephemeral beauty.",
+      "website": "https://caiguoqiang.com",
+      "portraitUrl": "https://upload.wikimedia.org/wikipedia/commons/9/96/CaiGuoQiangSpeakingOct10.jpg",
+      "tags": ["fire", "sky", "air"]
+    },
+    {
+      "id": "george-rickey",
+      "name": "George Rickey",
+      "born": 1907,
+      "nationality": "American",
+      "bio": "George Rickey was one of the most important kinetic sculptors of the twentieth century, creating geometric abstractions in stainless steel engineered to move with the slightest air currents. His sculptures \u2014 powered solely by wind and gravity, never by motors \u2014 translate invisible atmospheric forces into slow, hypnotic choreography.",
+      "website": "https://www.georgerickey.org",
+      "portraitUrl": "https://upload.wikimedia.org/wikipedia/commons/3/36/George_Rickey_%28cropped%29.jpg",
+      "tags": ["wind", "metal"]
+    },
+    {
+      "id": "susumu-shingu",
+      "name": "Susumu Shingu",
+      "born": 1937,
+      "nationality": "Japanese",
+      "bio": "Susumu Shingu transforms wind and water into poetry through elegantly engineered kinetic sculptures installed across six continents. Originally trained as a painter, he became captivated by the wind's potential when a canvas he hung outdoors began to move.",
+      "website": "https://susumushingu.com/en/",
+      "portraitUrl": "",
+      "tags": ["wind", "water"]
+    },
+    {
+      "id": "luke-jerram",
+      "name": "Luke Jerram",
+      "born": 1974,
+      "nationality": "British",
+      "bio": "Luke Jerram is a multidisciplinary artist whose installations transform public spaces into sites of wonder, using precise NASA imagery and scientific data to create immersive encounters with celestial bodies. His touring artworks have reached over 10 million viewers worldwide.",
+      "website": "https://www.lukejerram.com",
+      "portraitUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Luke_Jerram_in_2017.jpg",
+      "tags": ["light", "sky"]
+    },
+    {
+      "id": "cristina-iglesias",
+      "name": "Cristina Iglesias",
+      "born": 1956,
+      "nationality": "Spanish",
+      "bio": "Cristina Iglesias creates immersive sculptural environments where water, bronze, and architecture converge to reveal hidden forces beneath our feet. Her monumental public works transform plazas and buildings into living thresholds where water surges through intricately cast bronze landscapes.",
+      "website": "https://cristinaiglesias.com",
+      "portraitUrl": "https://upload.wikimedia.org/wikipedia/commons/9/91/Cristina_Iglesias_-_Berria.jpg",
+      "tags": ["water", "metal"]
+    },
+    {
+      "id": "bill-fontana",
+      "name": "Bill Fontana",
+      "born": 1947,
+      "nationality": "American",
+      "bio": "Bill Fontana is a pioneering sound sculptor who has spent over five decades revealing the hidden music of natural and architectural environments using microphones, accelerometers, and real-time audio networks. His installations transform how we perceive places by relocating sounds of nature into unexpected contexts.",
+      "website": "https://www.resoundings.info",
+      "portraitUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Prix_Ars_Electronical_2013_21_Bill_Fontana.jpg",
+      "tags": ["water", "wind"]
+    }
+  ],
+  "artworks": [
+    {
+      "id": "wind-veil",
+      "artistId": "ned-kahn",
+      "title": "Wind Veil",
+      "year": 2000,
+      "description": "A massive curtain of 80,000 small aluminum plates mounted on the facade of the Technorama science center. The panels ripple and shimmer in response to wind currents, making invisible air patterns visible as waves of light and shadow cascade across the building's surface.",
+      "location": "Technorama, Winterthur, Switzerland",
+      "materials": [
+        "Aluminum panels",
+        "Stainless steel"
+      ],
+      "dimensions": "70m \u00d7 14m",
+      "elements": [
+        "wind",
+        "metal"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/b/b7/Wind_Portal_by_Ned_Kahn%2C_October_2009.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Permanent installation at Technorama, Winterthur"
+      ],
+      "referenceUrl": "https://nedkahn.com/portfolio/wind-veil/"
+    },
+    {
+      "id": "weather-project",
+      "artistId": "olafur-eliasson",
+      "title": "The Weather Project",
+      "year": 2003,
+      "description": "A giant artificial sun made of mono-frequency lamps and a ceiling-spanning mirror filled the vast Turbine Hall at Tate Modern. Visitors lay on the floor gazing at their reflections, creating an extraordinary communal experience of manufactured weather and light.",
+      "location": "Tate Modern, London, UK",
+      "materials": [
+        "Mono-frequency lamps",
+        "Mirror foil",
+        "Haze machines"
+      ],
+      "dimensions": "26.7m \u00d7 22.3m \u00d7 155.4m (hall dimensions)",
+      "elements": [
+        "light",
+        "sun",
+        "mist"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/3/3a/Tate.modern.weather.project.jpg"
+      ],
+      "videoLinks": [
+        "https://www.youtube.com/watch?v=IsT9vEpfNq4"
+      ],
+      "exhibitions": [
+        "Tate Modern Unilever Series, 2003-2004"
+      ],
+      "referenceUrl": "https://olafureliasson.net/artwork/the-weather-project-2003/"
+    },
+    {
+      "id": "ice-watch",
+      "artistId": "olafur-eliasson",
+      "title": "Ice Watch",
+      "year": 2014,
+      "description": "Twelve massive blocks of glacial ice harvested from a fjord in Greenland were arranged in a clock formation in public squares. Visitors could touch and watch the ancient ice melt in real time \u2014 a visceral, poetic confrontation with climate change.",
+      "location": "City Hall Square, Copenhagen / Place du Panth\u00e9on, Paris",
+      "materials": [
+        "Glacial ice from Nuup Kangerlua fjord"
+      ],
+      "dimensions": "Each block 1.5-5 tonnes",
+      "elements": [
+        "ice",
+        "water"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/5/5e/Glacier_ice_installation_%27Ice_Watch%27_at_Place_du_Panth%C3%A9on%2C_Paris_%2823513516505%29.jpg"
+      ],
+      "videoLinks": [
+        "https://www.youtube.com/watch?v=QpftaPHvrBc"
+      ],
+      "exhibitions": [
+        "Copenhagen City Hall Square 2014",
+        "Place du Panth\u00e9on, Paris 2015"
+      ],
+      "referenceUrl": "https://olafureliasson.net/artwork/ice-watch-2014/"
+    },
+    {
+      "id": "waterfalls",
+      "artistId": "olafur-eliasson",
+      "title": "New York City Waterfalls",
+      "year": 2008,
+      "description": "Four massive artificial waterfalls, ranging from 27 to 37 meters tall, installed along New York's East River waterfront. The temporary public art project created dramatic cascades of water visible from Brooklyn, Manhattan, and passing ferries.",
+      "location": "East River, New York City, USA",
+      "materials": [
+        "Water",
+        "Steel scaffolding",
+        "Pumps"
+      ],
+      "dimensions": "27-37m tall",
+      "elements": [
+        "water"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/1/18/Olafur_Eliasson%27s_Waterfalls_under_the_Brooklyn_Bridge.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Public Art Fund installation, Summer 2008"
+      ],
+      "referenceUrl": "https://olafureliasson.net/artwork/the-new-york-city-waterfalls-2008/"
+    },
+    {
+      "id": "your-rainbow-panorama",
+      "artistId": "olafur-eliasson",
+      "title": "Your Rainbow Panorama",
+      "year": 2011,
+      "description": "A circular walkway of colored glass panels spanning the entire visible spectrum installed on the rooftop of the ARoS Museum. Visitors walk through a 150-meter rainbow loop, seeing the city of Aarhus transformed through every color of light.",
+      "location": "ARoS Aarhus Art Museum, Denmark",
+      "materials": [
+        "Colored glass",
+        "Steel"
+      ],
+      "dimensions": "52m diameter, 3m tall, 150m circumference",
+      "elements": [
+        "light"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/a/ac/Eliasson_Your_rainbow_panorama_1.JPG"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Permanent installation at ARoS Aarhus Art Museum"
+      ],
+      "referenceUrl": "https://olafureliasson.net/artwork/your-rainbow-panorama-2011/"
+    },
+    {
+      "id": "roden-crater",
+      "artistId": "james-turrell",
+      "title": "Roden Crater",
+      "year": 1979,
+      "description": "James Turrell's life work: transforming an extinct volcanic cinder cone in Arizona's Painted Desert into a monumental naked-eye observatory. Tunnels, chambers, and apertures frame celestial events \u2014 sunrise, sunset, moonrise, and the movements of stars \u2014 as pure experiences of light and space.",
+      "location": "Painted Desert, Arizona, USA",
+      "materials": [
+        "Volcanic cinder cone",
+        "Concrete",
+        "Stone"
+      ],
+      "dimensions": "Crater is 180m tall, 400m wide",
+      "elements": [
+        "light",
+        "sky",
+        "earth",
+        "sun"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/6/6c/Steven_Tepper_at_Roden_Crater.jpg"
+      ],
+      "videoLinks": [
+        "https://www.youtube.com/watch?v=9-m_4MoKwjQ"
+      ],
+      "exhibitions": [
+        "Ongoing since 1979, limited public access"
+      ],
+      "referenceUrl": "https://rodencrater.com/about/"
+    },
+    {
+      "id": "aten-reign",
+      "artistId": "james-turrell",
+      "title": "Aten Reign",
+      "year": 2013,
+      "description": "A site-specific installation transforming the rotunda of the Guggenheim Museum into a luminous volume of slowly shifting colored light. Concentric ellipses of LED light fill the spiraling space, creating an overwhelming experience of pure color and transcendence.",
+      "location": "Solomon R. Guggenheim Museum, New York, USA",
+      "materials": [
+        "LED lights",
+        "Fabric scrims"
+      ],
+      "dimensions": "Fills Guggenheim rotunda (30m tall)",
+      "elements": [
+        "light"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/5/5e/James_Turrell_At_the_Guggenheim_2013_NYC_Shankbone.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Guggenheim Museum retrospective, 2013"
+      ],
+      "referenceUrl": "https://www.guggenheim.org/exhibition/james-turrell"
+    },
+    {
+      "id": "skyspace-twilight-epiphany",
+      "artistId": "james-turrell",
+      "title": "Twilight Epiphany",
+      "year": 2012,
+      "description": "A pyramidal skyspace pavilion with a retractable roof that frames the sky as a canvas of light. At dawn and dusk, LED sequences wash the interior with color while the sky shifts overhead, creating a meditative experience of celestial transition.",
+      "location": "Rice University, Houston, USA",
+      "materials": [
+        "Concrete",
+        "Steel",
+        "LED lights"
+      ],
+      "dimensions": "22m \u00d7 24m footprint",
+      "elements": [
+        "light",
+        "sky"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/d/df/Dividing_the_Light_exterior.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/0/00/Three_Gems%2C_James_Turrell_Skyspace%2C_interior.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/4/4b/Pomona_College_Skyspace_03.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Permanent installation at Rice University"
+      ],
+      "referenceUrl": "https://moody.rice.edu/james-turrell-twilight-epiphany"
+    },
+    {
+      "id": "storm-king-wall",
+      "artistId": "andy-goldsworthy",
+      "title": "Storm King Wall",
+      "year": 1997,
+      "description": "A sinuous dry stone wall that winds through fields and woodland at Storm King Art Center, at one point diving into a pond and emerging on the other side. The 750-meter wall follows the natural contours of the landscape, appearing to flow like a river of stone.",
+      "location": "Storm King Art Center, New York, USA",
+      "materials": [
+        "Local fieldstone"
+      ],
+      "dimensions": "750m long, 1.5m tall",
+      "elements": [
+        "stone",
+        "earth"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/c/cc/Andy_Goldsworthy_Storm_King_Wall_%28196974395%29.jpeg"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Permanent installation at Storm King Art Center"
+      ],
+      "referenceUrl": "https://stormking.org/artist/andy-goldsworthy/"
+    },
+    {
+      "id": "cairn",
+      "artistId": "andy-goldsworthy",
+      "title": "Cairn",
+      "year": 2001,
+      "description": "An egg-shaped cairn built from carefully balanced slate and stone, part of Goldsworthy's series of cairns placed in dramatic landscapes. These stacked stone forms reference ancient markers while exploring the tension between permanence and fragility.",
+      "location": "Various locations worldwide",
+      "materials": [
+        "Slate",
+        "Stone"
+      ],
+      "dimensions": "Approximately 2m tall",
+      "elements": [
+        "stone"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/d/db/Cairn_%28Andy_Goldworthy_1997%29.JPG"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "National Gallery of Art, Washington D.C.",
+        "Various outdoor locations"
+      ],
+      "referenceUrl": "https://www.galerie-lelong.com/en/artist/andy-goldsworthy"
+    },
+    {
+      "id": "spiral-jetty",
+      "artistId": "robert-smithson",
+      "title": "Spiral Jetty",
+      "year": 1970,
+      "description": "The most iconic earthwork ever created: a 460-meter counterclockwise coil of mud, basalt, and salt crystals extending into the Great Salt Lake. The jetty rises and disappears with water levels, its black basalt encrusted with white salt crystals, constantly transformed by the lake's ecology.",
+      "location": "Rozel Point, Great Salt Lake, Utah, USA",
+      "materials": [
+        "Black basalt",
+        "Earth",
+        "Salt crystals"
+      ],
+      "dimensions": "460m long, 4.6m wide",
+      "elements": [
+        "earth",
+        "water",
+        "stone"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/8/84/Spiral-jetty-from-rozel-point.png"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Permanent earthwork, maintained by Dia Art Foundation"
+      ],
+      "referenceUrl": "https://www.diaart.org/visit/visit-our-locations-sites/robert-smithson-spiral-jetty"
+    },
+    {
+      "id": "broken-circle",
+      "artistId": "robert-smithson",
+      "title": "Broken Circle / Spiral Hill",
+      "year": 1971,
+      "description": "A two-part earthwork created for the Sonsbeek exhibition: a broken circle of sand and water in a quarry lake, paired with a spiral hill on its shore. The only Smithson earthwork in Europe, it plays with positive and negative space, land and water, ascent and enclosure.",
+      "location": "Emmen, Netherlands",
+      "materials": [
+        "Sand",
+        "Water",
+        "Earth",
+        "Boulders"
+      ],
+      "dimensions": "Circle: 43m diameter; Hill: 23m diameter",
+      "elements": [
+        "earth",
+        "water",
+        "sand"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/e/e7/Emmen_Smithson_Broken_Circle.JPG"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Sonsbeek '71, permanent installation in Emmen"
+      ],
+      "referenceUrl": "https://holtsmithsonfoundation.org/broken-circle-spiral-hill"
+    },
+    {
+      "id": "partially-buried-woodshed",
+      "artistId": "robert-smithson",
+      "title": "Partially Buried Woodshed",
+      "year": 1970,
+      "description": "Twenty truckloads of earth were poured onto a woodshed at Kent State University until its central beam cracked and buckled. The work embodies Smithson's concept of entropy \u2014 the irreversible process of decay and collapse that governs all structures.",
+      "location": "Kent State University, Ohio, USA",
+      "materials": [
+        "Earth",
+        "Existing woodshed structure"
+      ],
+      "dimensions": "Site-specific",
+      "elements": [
+        "earth"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/0/04/Partially_Buried_Woodshed_Remains.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Kent State University, 1970 (structure has since deteriorated)"
+      ],
+      "referenceUrl": "https://holtsmithsonfoundation.org/partially-buried-woodshed"
+    },
+    {
+      "id": "lightning-field",
+      "artistId": "walter-de-maria",
+      "title": "The Lightning Field",
+      "year": 1977,
+      "description": "400 stainless steel poles arranged in a precise rectangular grid across a remote high desert plain in New Mexico. The poles attract lightning during storms, creating spectacular natural light shows, though the piece is equally powerful in calm weather as the poles catch sunlight and seem to dissolve into the landscape.",
+      "location": "Catron County, New Mexico, USA",
+      "materials": [
+        "400 stainless steel poles"
+      ],
+      "dimensions": "1 mile \u00d7 1 km grid",
+      "elements": [
+        "light",
+        "metal",
+        "sky"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/1/18/Walter_de_Maria%2C_The_Lightning_Field%2C_1977_%287873321374%29.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Permanent installation, Dia Art Foundation (overnight visits by appointment)"
+      ],
+      "referenceUrl": "https://www.diaart.org/visit/visit-our-locations-sites/walter-de-maria-the-lightning-field"
+    },
+    {
+      "id": "earth-room",
+      "artistId": "walter-de-maria",
+      "title": "The New York Earth Room",
+      "year": 1977,
+      "description": "127,300 kilograms of dark, moist earth fill a pristine white SoHo loft to a depth of 56 centimeters. The rich smell of soil and the surreal sight of an interior landscape occupying a Manhattan apartment create a powerful sensory dislocation between urban life and the natural world.",
+      "location": "141 Wooster Street, New York City, USA",
+      "materials": [
+        "Earth",
+        "Peat",
+        "Bark"
+      ],
+      "dimensions": "335 sq meters of floor covered 56cm deep",
+      "elements": [
+        "earth"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/4/4e/New_York_Earth_Room_in_2024.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/e/e0/New_York_Earth_Room_1.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Permanent installation, open since 1980, maintained by Dia Art Foundation"
+      ],
+      "referenceUrl": "https://www.diaart.org/visit/visit-our-locations-sites/walter-de-maria-the-new-york-earth-room"
+    },
+    {
+      "id": "broken-kilometer",
+      "artistId": "walter-de-maria",
+      "title": "The Broken Kilometer",
+      "year": 1979,
+      "description": "500 highly polished brass rods, each 2 meters long, arranged in five parallel rows across a SoHo loft. The spacing between rods increases progressively, creating a visual compression that plays with perspective and the viewer's perception of depth and distance.",
+      "location": "393 West Broadway, New York City, USA",
+      "materials": [
+        "500 solid brass rods"
+      ],
+      "dimensions": "Each rod: 2m long, 5cm diameter",
+      "elements": [
+        "metal",
+        "light"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/b/b4/Broken_kilometer_2.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/b/bf/Broken_kilometer_1.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Permanent installation, Dia Art Foundation"
+      ],
+      "referenceUrl": "https://www.diaart.org/visit/visit-our-locations-sites/walter-de-maria-the-broken-kilometer"
+    },
+    {
+      "id": "appearing-rooms",
+      "artistId": "jeppe-hein",
+      "title": "Appearing Rooms",
+      "year": 2004,
+      "description": "A fountain sculpture made of precisely controlled water jets that form and dissolve transparent walls of water, creating four rooms that appear and disappear in a choreographed sequence. Visitors can enter the rooms and experience being momentarily enclosed by walls of falling water.",
+      "location": "Southbank Centre, London, UK (and touring)",
+      "materials": [
+        "Water jets",
+        "Computer-controlled pumps"
+      ],
+      "dimensions": "4m \u00d7 4m \u00d7 2.5m",
+      "elements": [
+        "water"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/0/0f/Appearing_Rooms_Jeppe_Hein.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/7/7c/Appearing_Rooms_Jeppe_Hein_in_Art_Basel_06%2C_Basel%2C_CH%2C_2006.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Southbank Centre, London (summers)",
+        "Various international venues"
+      ],
+      "referenceUrl": "https://www.jeppehein.net/project_id.php?path=works&id=127"
+    },
+    {
+      "id": "modified-social-benches",
+      "artistId": "jeppe-hein",
+      "title": "Modified Social Benches",
+      "year": 2005,
+      "description": "A series of park benches modified into absurd, playful, and challenging forms \u2014 curved, twisted, looped, spiked, or impossibly angled. Each bench questions how public furniture shapes social behavior and invites passersby into unexpected physical interactions.",
+      "location": "Various public spaces worldwide",
+      "materials": [
+        "Powder-coated steel"
+      ],
+      "dimensions": "Various (standard bench scale)",
+      "elements": [
+        "metal"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/8/8e/Modified_Social_Benches_by_Jeppe_Hein_on_Southbank_London.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/1/15/Modified_Social_Bench_No_5_%28Jeppe_Hein%29-2.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Brooklyn Bridge Park",
+        "High Line, New York",
+        "Various international locations"
+      ],
+      "referenceUrl": "https://www.jeppehein.net/project_id.php?path=works&id=80"
+    },
+    {
+      "id": "fire-fountain",
+      "artistId": "jeppe-hein",
+      "title": "Fire Fountain",
+      "year": 2010,
+      "description": "A fountain that alternates between shooting water and fire from the same jets, creating a mesmerizing dance of opposing elements. The work transforms a traditional architectural element into a spectacle of elemental contradiction.",
+      "location": "Various public spaces",
+      "materials": [
+        "Water jets",
+        "Gas burners",
+        "Computer controls"
+      ],
+      "dimensions": "Variable",
+      "elements": [
+        "water",
+        "fire"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/8/89/Waterflame_in_the_walled_garden_of_Houghton_Hall_-_Artist_Jeppe_Hein_-_geograph.org.uk_-_5858241.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Various international venues"
+      ],
+      "referenceUrl": "https://www.jeppehein.net/project_id.php?path=works&id=178"
+    },
+    {
+      "id": "1-78",
+      "artistId": "janet-echelman",
+      "title": "1.78",
+      "year": 2015,
+      "description": "Named for the 1.78 microseconds by which the 2011 Japanese earthquake shortened the day, this monumental aerial sculpture spans over a city block in Boston. Woven from ultra-high-molecular-weight polyethylene fiber stronger than steel, it billows and transforms with wind and is illuminated in shifting colors at night.",
+      "location": "Greenway, Boston, Massachusetts, USA",
+      "materials": [
+        "UHMWPE fiber",
+        "Colored lighting"
+      ],
+      "dimensions": "Spans 190m",
+      "elements": [
+        "wind",
+        "fiber",
+        "light"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/b/b6/Janet_Echelman%2C_1.26%2C_2015_%2819440811683%29.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Permanent installation on the Rose Kennedy Greenway, Boston"
+      ],
+      "referenceUrl": "https://www.echelman.com/project/boston-greenway"
+    },
+    {
+      "id": "she-changes",
+      "artistId": "janet-echelman",
+      "title": "She Changes",
+      "year": 2005,
+      "description": "A permanent monumental net sculpture at the Porto roundabout near the sea, inspired by the city's fishing heritage. The red and gold nets billow in the ocean winds, constantly changing shape, resembling a massive jellyfish or sea creature floating above the traffic circle.",
+      "location": "Porto, Portugal",
+      "materials": [
+        "Polyester fiber nets",
+        "Steel ring",
+        "Cables"
+      ],
+      "dimensions": "50m tall",
+      "elements": [
+        "wind",
+        "fiber"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/d/d5/She_Changes_Sculpture_In_Porto.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/0/0e/Matosinhos_-_Net_sculpture_by_Janet_Echelman.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Permanent installation in Porto, Portugal"
+      ],
+      "referenceUrl": "https://www.echelman.com/project/she-changes"
+    },
+    {
+      "id": "skies-painted-with-unnumbered-sparks",
+      "artistId": "janet-echelman",
+      "title": "Skies Painted with Unnumbered Sparks",
+      "year": 2014,
+      "description": "A massive aerial sculpture suspended between buildings at the TED conference in Vancouver. At night, attendees could choreograph the sculpture's lighting using their smartphones, transforming the collective gestures of hundreds of people into flowing patterns of light across the fiber canopy.",
+      "location": "Vancouver, Canada",
+      "materials": [
+        "UHMWPE fiber",
+        "Interactive LED lighting"
+      ],
+      "dimensions": "Spans 213m between buildings",
+      "elements": [
+        "wind",
+        "fiber",
+        "light"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/1/1a/Janet_Echelman%27s_Netting_Sculpture_-_Explored_-_Flickr_-_winson.tang.jpg"
+      ],
+      "videoLinks": [
+        "https://www.youtube.com/watch?v=npjTmG-TBHQ"
+      ],
+      "exhibitions": [
+        "TED Conference, Vancouver 2014"
+      ],
+      "referenceUrl": "https://www.echelman.com/project/skies-painted"
+    },
+    {
+      "id": "earthsea",
+      "artistId": "janet-echelman",
+      "title": "Earthtime 1.26",
+      "year": 2017,
+      "description": "A monumental aerial sculpture that visualizes the tsunami wave heights caused by the 2010 Chilean earthquake. The net's form was generated from NASA data of the tsunami's propagation across the Pacific Ocean, translating scientific data into a breathtaking physical form.",
+      "location": "Various cities",
+      "materials": [
+        "UHMWPE fiber",
+        "Colored lighting"
+      ],
+      "dimensions": "Site-specific, spans buildings",
+      "elements": [
+        "wind",
+        "fiber",
+        "light"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/f/f3/Escultura_1.8-de_Janet_Echelman%2C_Madrid%2C_Espa%C3%B1a.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/c/ca/Janet_Echelman_1.8_Renwick.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Various international venues"
+      ],
+      "referenceUrl": "https://www.echelman.com/project/earthtime-126"
+    },
+    {
+      "id": "vietnam-veterans-memorial",
+      "artistId": "maya-lin",
+      "title": "Vietnam Veterans Memorial",
+      "year": 1982,
+      "description": "A V-shaped wall of polished black granite inscribed with the names of 58,318 Americans who died in the Vietnam War. The reflective surface merges visitors' reflections with the names, while the wall emerges from and returns to the earth, creating a wound in the landscape that heals through remembrance.",
+      "location": "National Mall, Washington D.C., USA",
+      "materials": [
+        "Black granite"
+      ],
+      "dimensions": "150m long, 3m tall at apex",
+      "elements": [
+        "stone",
+        "earth"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/4/43/Reflections_in_the_Vietnam_Veterans_Memorial.JPG"
+      ],
+      "videoLinks": [
+        "https://www.youtube.com/watch?v=wuxjTxxQUTs"
+      ],
+      "exhibitions": [
+        "Permanent memorial, National Mall, Washington D.C."
+      ],
+      "referenceUrl": "https://www.mayalin.com"
+    },
+    {
+      "id": "wave-field",
+      "artistId": "maya-lin",
+      "title": "Wave Field",
+      "year": 1995,
+      "description": "An undulating landscape of grass-covered earth waves that transforms a flat lawn into a rolling sea of green. The precisely sculpted mounds mimic ocean waves frozen mid-motion, creating a meditative landscape that visitors can walk through and recline upon.",
+      "location": "University of Michigan, Ann Arbor, USA",
+      "materials": [
+        "Earth",
+        "Grass"
+      ],
+      "dimensions": "30m \u00d7 30m",
+      "elements": [
+        "earth",
+        "water"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/e/e3/Wave_Field%2C_University_of_Michigan%2C_Ann_Arbor%2C_Michigan.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Permanent installation at University of Michigan"
+      ],
+      "referenceUrl": "https://www.mayalin.com"
+    },
+    {
+      "id": "lucea",
+      "artistId": "anthony-howe",
+      "title": "Lucea",
+      "year": 2014,
+      "description": "A large-scale wind-driven kinetic sculpture of curved stainless steel fins that rotate around a central axis. In even light breezes, the sculpture comes alive with hypnotic, organic-seeming motion \u2014 the fins appear to breathe and pulse like a living deep-sea organism.",
+      "location": "Private collection / touring",
+      "materials": [
+        "Stainless steel"
+      ],
+      "dimensions": "3m diameter",
+      "elements": [
+        "wind",
+        "metal"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/5/5d/Greenville_-_Octo_2.jpg"
+      ],
+      "videoLinks": [
+        "https://www.youtube.com/watch?v=tbrkUmzPzHk"
+      ],
+      "exhibitions": [
+        "Various exhibitions and private collections"
+      ],
+      "referenceUrl": "https://www.howeart.net/lucea/"
+    },
+    {
+      "id": "olympic-cauldron-howe",
+      "artistId": "anthony-howe",
+      "title": "Olympic Cauldron (Rio 2016)",
+      "year": 2016,
+      "description": "The kinetic sculpture for the 2016 Rio Olympics cauldron \u2014 a sun-shaped kinetic sculpture with radiating petals that rotated in the wind above the Olympic flame. Seen by billions during the opening ceremony, it became an iconic symbol of the games, combining fire, wind, and sculptural motion.",
+      "location": "Rio de Janeiro, Brazil",
+      "materials": [
+        "Stainless steel",
+        "Olympic flame"
+      ],
+      "dimensions": "3.6m diameter",
+      "elements": [
+        "wind",
+        "fire",
+        "metal"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/8/8b/Lighting_of_the_Rio_Olympic_Games_cauldron_%2828750518291%29.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/7/7c/Lighting_of_the_Rio_Olympic_Games_cauldron_%2828212157823%29.jpg"
+      ],
+      "videoLinks": [
+        "https://www.youtube.com/watch?v=agYO1oXuiEY"
+      ],
+      "exhibitions": [
+        "2016 Rio Olympics Opening Ceremony",
+        "Permanent display in Rio de Janeiro"
+      ],
+      "referenceUrl": "https://www.howeart.net/rio-2016-olympic-cauldron/"
+    },
+    {
+      "id": "der-turm",
+      "artistId": "nils-udo",
+      "title": "Der Turm (The Tower)",
+      "year": 1982,
+      "description": "A monumental tower structure built from natural materials \u2014 branches, earth, and living plants \u2014 rising from the forest floor in Frenswegen, Germany. Part of the Kunstwegen sculpture trail, this permanent outdoor work embodies Nils-Udo's vision of architecture grown from nature itself.",
+      "location": "Frenswegen, Nordhorn, Germany",
+      "materials": [
+        "Branches",
+        "Earth",
+        "Living plants"
+      ],
+      "dimensions": "Site-specific tower installation",
+      "elements": [
+        "plants",
+        "earth"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/e/e8/Nordhorn_Nils03.JPG",
+        "https://upload.wikimedia.org/wikipedia/commons/0/0d/Nordhorn_Nils02.JPG",
+        "https://upload.wikimedia.org/wikipedia/commons/9/95/Nordhorn_Nils01.JPG"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Permanent installation on Kunstwegen sculpture trail, Nordhorn"
+      ],
+      "referenceUrl": "https://www.nils-udo.com"
+    },
+    {
+      "id": "nils-udo-earth-art",
+      "artistId": "nils-udo",
+      "title": "Earth Art",
+      "year": 2000,
+      "description": "A land art installation using natural materials arranged directly in the landscape. Nils-Udo's earth artworks transform found natural elements into composed forms that blur the boundary between sculpture and landscape, art and ecology.",
+      "location": "Various outdoor locations",
+      "materials": [
+        "Earth",
+        "Natural materials"
+      ],
+      "dimensions": "Site-specific",
+      "elements": [
+        "earth",
+        "plants"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/d/dc/Nils_Udo_-_Earth_Art.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Various outdoor exhibitions"
+      ],
+      "referenceUrl": "https://www.nils-udo.com"
+    },
+    {
+      "id": "cloud-cities",
+      "artistId": "tomas-saraceno",
+      "title": "Cloud Cities",
+      "year": 2011,
+      "description": "Interconnected transparent spheres and geometric structures suspended in space, creating inhabitable cloud-like formations. First shown at Hamburger Bahnhof in Berlin and later at Torre Gl\u00f2ries in Barcelona, these floating architectures envision a future of airborne living inspired by soap bubbles and spider webs.",
+      "location": "Hamburger Bahnhof, Berlin / Torre Gl\u00f2ries, Barcelona",
+      "materials": [
+        "PVC spheres",
+        "Steel cable",
+        "Transparent panels"
+      ],
+      "dimensions": "Variable, room-scale installations",
+      "elements": [
+        "air",
+        "light"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/1/1a/Cloud_Cities_Barcelona.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Hamburger Bahnhof, Berlin 2011-2012",
+        "Torre Gl\u00f2ries, Barcelona"
+      ],
+      "referenceUrl": "https://studiotomassaraceno.org/cloud-cities/"
+    },
+    {
+      "id": "connectome",
+      "artistId": "tomas-saraceno",
+      "title": "Connectome",
+      "year": 2013,
+      "description": "A sprawling web-like installation of interconnected threads and nodes that visualizes the neural networks of the brain and the cosmic web of the universe. Saraceno draws parallels between spider webs, neural pathways, and the large-scale structure of the cosmos, proposing radical interconnection as a fundamental principle.",
+      "location": "Various museums",
+      "materials": [
+        "Thread",
+        "Light",
+        "Mixed media"
+      ],
+      "dimensions": "Variable",
+      "elements": [
+        "spider",
+        "light"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/5/5a/Tom%C3%A1s_Saraceno_-_new_connectome_%28working_title%29_%2810923260633%29.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Various international exhibitions"
+      ],
+      "referenceUrl": "https://studiotomassaraceno.org"
+    },
+    {
+      "id": "saraceno-le-muy",
+      "artistId": "tomas-saraceno",
+      "title": "Outdoor Sculpture at Domaine du Muy",
+      "year": 2015,
+      "description": "A large-scale outdoor sculpture installed in the grounds of Domaine du Muy in southern France. The reflective, geometric structure interacts with sunlight and the natural landscape, embodying Saraceno's ongoing exploration of lightweight architecture and solar energy.",
+      "location": "Domaine du Muy, France",
+      "materials": [
+        "Metal",
+        "Reflective surfaces"
+      ],
+      "dimensions": "Large-scale outdoor",
+      "elements": [
+        "sun",
+        "air",
+        "metal"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/2/2f/T.Saraceno-LeMuy.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Permanent installation at Domaine du Muy"
+      ],
+      "referenceUrl": "https://studiotomassaraceno.org"
+    },
+    {
+      "id": "tornado",
+      "artistId": "ned-kahn",
+      "title": "Tornado",
+      "year": 1990,
+      "description": "A controlled vortex of mist created inside a transparent chamber. Using fans and ultrasonic foggers, Kahn generates a real tornado visible from all angles \u2014 a captivating demonstration of fluid dynamics and atmospheric science made tangible.",
+      "location": "Exploratorium, San Francisco, USA",
+      "materials": [
+        "Mist",
+        "Fans",
+        "Transparent chamber"
+      ],
+      "dimensions": "3m height",
+      "elements": [
+        "wind",
+        "mist"
+      ],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/2/26/Making_tornadoes_%282798220743%29.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Permanent installation at Exploratorium, San Francisco"
+      ],
+      "referenceUrl": "https://nedkahn.com/portfolio/tornado/"
+    },
+    {
+      "id": "wave-oculus",
+      "artistId": "ned-kahn",
+      "title": "Wave Oculus",
+      "year": 2015,
+      "description": "An enormous circular wave pool installed in the ceiling of a building atrium. Water moves in slow, mesmerizing wave patterns visible from below through a glass oculus, creating an ever-changing liquid mandala overhead.",
+      "location": "San Francisco International Airport, USA",
+      "materials": [
+        "Water",
+        "Glass",
+        "Steel basin"
+      ],
+      "dimensions": "4.5m diameter",
+      "elements": [
+        "water"
+      ],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": [
+        "Permanent installation at SFO Terminal 2"
+      ],
+      "referenceUrl": "https://nedkahn.com/portfolio/wave-oculus/"
+    },
+    {
+      "id": "cloud-arbor",
+      "artistId": "ned-kahn",
+      "title": "Cloud Arbor",
+      "year": 2004,
+      "description": "A grove of tree-like structures that emit clouds of fine mist from their canopies. Visitors walk beneath a manufactured fog layer that responds to wind conditions, creating an immersive microclimate experience.",
+      "location": "Children's Museum of Pittsburgh, USA",
+      "materials": [
+        "Steel",
+        "Mist nozzles",
+        "Water"
+      ],
+      "dimensions": "Site-specific installation",
+      "elements": [
+        "water",
+        "mist"
+      ],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": [
+        "Permanent installation at Children's Museum of Pittsburgh"
+      ],
+      "referenceUrl": "https://nedkahn.com/portfolio/cloud-arbor/"
+    },
+    {
+      "id": "rowan-leaves-hole",
+      "artistId": "andy-goldsworthy",
+      "title": "Rowan Leaves and Hole",
+      "year": 1987,
+      "description": "A spiral arrangement of autumn rowan leaves grading from green at the edges through yellow and orange to a deep black void at the center. The leaves were pinned together with thorns in a precise color gradient that appears to descend into infinite darkness.",
+      "location": "Yorkshire Sculpture Park, UK",
+      "materials": [
+        "Rowan leaves",
+        "Thorns"
+      ],
+      "dimensions": "Approximately 60cm diameter",
+      "elements": [
+        "plants"
+      ],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": [
+        "Photographed in situ, 1987"
+      ],
+      "referenceUrl": "https://www.goldsworthy.cc.gla.ac.uk/"
+    },
+    {
+      "id": "icicle-star",
+      "artistId": "andy-goldsworthy",
+      "title": "Icicle Star",
+      "year": 1987,
+      "description": "Icicles carefully joined together with saliva and frozen breath to form a radiating star shape. Created in bitter cold, this ephemeral sculpture lasted only until the sun warmed it, embodying Goldsworthy's philosophy of working within nature's cycles of creation and dissolution.",
+      "location": "Scaur Glen, Dumfriesshire, Scotland",
+      "materials": [
+        "Icicles"
+      ],
+      "dimensions": "Approximately 40cm diameter",
+      "elements": [
+        "ice"
+      ],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": [
+        "Photographed in situ, documented in 'Andy Goldsworthy: A Collaboration with Nature'"
+      ],
+      "referenceUrl": "https://www.goldsworthy.cc.gla.ac.uk/"
+    },
+    {
+      "id": "the-nest",
+      "artistId": "nils-udo",
+      "title": "The Nest",
+      "year": 1978,
+      "description": "One of Nils-Udo's earliest and most iconic works: an enormous bird's nest built from earth, stones, and branches in a Bavarian forest clearing, large enough for a human to lie inside. The work invites contemplation of our place within the natural world.",
+      "location": "L\u00fcneburg Heath, Germany",
+      "materials": [
+        "Earth",
+        "Branches",
+        "Birch trunks",
+        "Grass"
+      ],
+      "dimensions": "4m diameter",
+      "elements": [
+        "plants",
+        "earth"
+      ],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": [
+        "Documented in 'Nils-Udo: Art in Nature'"
+      ],
+      "referenceUrl": "https://www.nils-udo.com"
+    },
+    {
+      "id": "clemson-clay-nest",
+      "artistId": "nils-udo",
+      "title": "Clemson Clay Nest",
+      "year": 2005,
+      "description": "A monumental nest-like structure woven from branches and natural materials, set within a forest clearing. The oversized nest cradles elements of the landscape, creating a surreal meeting point between human-scale art and the nurturing forms found in nature.",
+      "location": "Clemson University, South Carolina, USA",
+      "materials": [
+        "Branches",
+        "Clay",
+        "Leaves"
+      ],
+      "dimensions": "5m diameter",
+      "elements": [
+        "plants",
+        "earth"
+      ],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": [
+        "Clemson University Botanical Gardens"
+      ],
+      "referenceUrl": "https://www.nils-udo.com"
+    },
+    {
+      "id": "in-orbit",
+      "artistId": "tomas-saraceno",
+      "title": "In Orbit",
+      "year": 2013,
+      "description": "A vast installation of interconnected transparent spheres and net levels suspended 25 meters above the ground in the K21 museum. Visitors can climb into the nets and walk among the spheres, experiencing the sensation of floating in space while seeing other visitors below and above as tiny figures.",
+      "location": "K21 Kunstsammlung, D\u00fcsseldorf, Germany",
+      "materials": [
+        "PVC spheres",
+        "Steel cable nets",
+        "Steel rings"
+      ],
+      "dimensions": "2,500 sq meters, 25m above ground",
+      "elements": [
+        "air"
+      ],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": [
+        "K21 Kunstsammlung, D\u00fcsseldorf, 2013-2022"
+      ],
+      "referenceUrl": "https://studiotomassaraceno.org/in-orbit/"
+    },
+    {
+      "id": "aerocene",
+      "artistId": "tomas-saraceno",
+      "title": "Aerocene",
+      "year": 2015,
+      "description": "A series of solar-powered aerosolar sculptures that float using only the heat of the sun and infrared radiation from the Earth's surface \u2014 no fossil fuels, batteries, or helium. The project envisions a new era of emission-free flight and has set world records for solar-powered human flight.",
+      "location": "Various locations worldwide",
+      "materials": [
+        "Recycled plastic bags",
+        "Solar heat"
+      ],
+      "dimensions": "Variable (up to 20m diameter)",
+      "elements": [
+        "sun",
+        "air"
+      ],
+      "imageUrls": [],
+      "videoLinks": [
+        "https://www.youtube.com/watch?v=B5pFS8XD_MM"
+      ],
+      "exhibitions": [
+        "Various international venues",
+        "White Sands, New Mexico"
+      ],
+      "referenceUrl": "https://aerocene.org/"
+    },
+    {
+      "id": "storm-king-wavefield",
+      "artistId": "maya-lin",
+      "title": "Storm King Wavefield",
+      "year": 2009,
+      "description": "Maya Lin's largest wave field: seven rows of undulating earth waves rippling across an 11-acre meadow at Storm King Art Center. The monumental earthwork transforms the Hudson Valley landscape into a frozen ocean, its scale only fully appreciable from above or when walking among its grassy swells.",
+      "location": "Storm King Art Center, New York, USA",
+      "materials": [
+        "Earth",
+        "Grass"
+      ],
+      "dimensions": "4.5 hectares",
+      "elements": [
+        "earth"
+      ],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": [
+        "Permanent installation at Storm King Art Center"
+      ],
+      "referenceUrl": "https://stormking.org/artist/maya-lin/"
+    },
+    {
+      "id": "di-octo",
+      "artistId": "anthony-howe",
+      "title": "Di-Octo",
+      "year": 2017,
+      "description": "A double-layered kinetic sculpture with eight arms on each layer that counter-rotate in the wind. The two layers create complex, mesmerizing interference patterns as they spin at different speeds, producing an almost digital-looking moir\u00e9 effect from purely mechanical motion.",
+      "location": "Concordia University, Montreal, Canada",
+      "materials": [
+        "Stainless steel"
+      ],
+      "dimensions": "2.5m diameter",
+      "elements": [
+        "wind",
+        "metal"
+      ],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": [
+        "Permanent installation at Concordia University"
+      ],
+      "referenceUrl": "https://www.howeart.net/diocto-and-sculptor-2015/"
+    },
+    {
+      "id": "smoking-bench",
+      "artistId": "jeppe-hein",
+      "title": "Smoking Bench",
+      "year": 2003,
+      "description": "A sleek minimalist bench that suddenly begins to emit clouds of steam when someone sits on it. The unexpected vapor transforms a mundane act of sitting into a surprising, humorous, and slightly surreal public experience.",
+      "location": "Various galleries and public spaces",
+      "materials": [
+        "Steel",
+        "Steam generators"
+      ],
+      "dimensions": "Standard bench dimensions",
+      "elements": [
+        "water",
+        "mist"
+      ],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": [
+        "Various international exhibitions"
+      ],
+      "referenceUrl": "https://www.jeppehein.net/project_id.php?path=works&id=42"
+    },
+    {
+      "id": "fire-vortex",
+      "artistId": "ned-kahn",
+      "title": "Fire Vortex",
+      "year": 1997,
+      "description": "A 6-meter-tall vortex of swirling fire forms over a pool of burning kerosene in a dark atrium. Fans and blowers create a spinning column of flame that spirals upward, leaving a hollow calm at its center. Visitors view from a balcony and can feel the heat and hear the rumbling of the flames.",
+      "location": "Technorama, Winterthur, Switzerland",
+      "materials": ["Kerosene", "Fans", "Blowers", "Metal basin"],
+      "dimensions": "6m tall vortex",
+      "elements": ["fire", "wind"],
+      "imageUrls": [],
+      "videoLinks": ["https://www.youtube.com/watch?v=Q2kXEevj3k4"],
+      "exhibitions": ["Permanent installation at Technorama, Winterthur"],
+      "referenceUrl": "https://nedkahn.com/portfolio/fire-vortex/"
+    },
+    {
+      "id": "captured-cloud",
+      "artistId": "ned-kahn",
+      "title": "Captured Cloud",
+      "year": 2021,
+      "description": "Between two semicircular steel walls, over 300 mist nozzles produce an artificial cloud that visitors can walk through. The cloud drifts with the wind through the outdoor park, creating a mystical atmosphere that makes the invisible movements of air tangible.",
+      "location": "Technorama Outdoors, Winterthur, Switzerland",
+      "materials": ["Steel walls", "300+ mist nozzles", "Water"],
+      "dimensions": "Site-specific outdoor installation",
+      "elements": ["mist", "wind", "water"],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": ["Permanent installation at Technorama Outdoors, Winterthur"],
+      "referenceUrl": "https://www.technorama.ch/en/technorama-draussen"
+    },
+    {
+      "id": "water-vortex",
+      "artistId": "ned-kahn",
+      "title": "Water Vortex",
+      "year": 2021,
+      "description": "A 6-meter-diameter stainless steel basin filled through angled inlets that direct water in a circular motion, creating a dramatic whirlpool. When full, the water supply stops, the vortex calms, and the basin slowly empties before the cycle restarts \u2014 visualizing natural water phenomena in a mesmerizing loop.",
+      "location": "Technorama Outdoors, Winterthur, Switzerland",
+      "materials": ["Stainless steel basin", "Water", "Pumps"],
+      "dimensions": "6m diameter",
+      "elements": ["water", "metal"],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": ["Permanent installation at Technorama Outdoors, Winterthur"],
+      "referenceUrl": "https://explorer.technorama.ch/en/exhibit/water-vortex"
+    },
+    {
+      "id": "fog-bridge",
+      "artistId": "fujiko-nakaya",
+      "title": "Fog Bridge #72494",
+      "year": 2013,
+      "description": "A 150-foot pedestrian bridge lined with over 800 fog nozzles that emit dense clouds of water vapor every half hour. The fog interacts with San Francisco Bay winds, constantly reshaping into new forms. Originally temporary, it became permanent due to enormous popularity. A desalination system conditions bay water for the artwork.",
+      "location": "Exploratorium, San Francisco, USA",
+      "materials": ["800+ fog nozzles", "Desalinated bay water", "Steel bridge"],
+      "dimensions": "46m long bridge",
+      "elements": ["mist", "water", "wind"],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/a/aa/Fog_Bridge_at_the_Exploratorium.jpeg"
+      ],
+      "videoLinks": ["https://www.youtube.com/watch?v=eTF6jU01Blk"],
+      "exhibitions": ["Permanent installation at Exploratorium, Pier 15"],
+      "referenceUrl": "https://www.exploratorium.edu/exhibits/fog-bridge-72494"
+    },
+    {
+      "id": "fog-sculpture-bilbao",
+      "artistId": "fujiko-nakaya",
+      "title": "Fog Sculpture #08025",
+      "year": 1998,
+      "description": "A permanent fog installation at the Guggenheim Museum Bilbao that periodically shrouds Frank Gehry's titanium-clad building in dense artificial fog. The mist transforms the iconic architecture into an ethereal, dissolving form, making the building appear to breathe and vanish into the landscape.",
+      "location": "Guggenheim Museum, Bilbao, Spain",
+      "materials": ["Fog nozzles", "Water", "Pumps"],
+      "dimensions": "Building-scale installation",
+      "elements": ["mist", "water"],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/3/35/Fog_Sculpture_de_Fujiko_Nakaya_%28mus%C3%A9e_Guggenheim%2C_Bilbao%29_%283450447453%29.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/f/f5/Guggenheim_Museum_Bilbao_fog_installation.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": ["Permanent installation at Guggenheim Museum Bilbao"],
+      "referenceUrl": "https://www.guggenheim.org/artwork/artist/fujiko-nakaya"
+    },
+    {
+      "id": "strandbeest",
+      "artistId": "theo-jansen",
+      "title": "Strandbeest",
+      "year": 1990,
+      "description": "Wind-powered kinetic 'beach animals' built from PVC piping, wood, and fabric sails that walk autonomously on Dutch beaches. More sophisticated versions store compressed air for calm moments, detect and retreat from water, and anchor themselves in storms. Jansen has been evolving these creatures for over 30 years, describing them as a new form of life.",
+      "location": "Dutch beaches / Various museums worldwide",
+      "materials": ["PVC piping", "Wood", "Fabric sails", "Zip ties"],
+      "dimensions": "Variable (up to 12m long)",
+      "elements": ["wind", "sand"],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/3/3b/Jansen-Strandbeest.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/0/07/Strandbeest_by_Theo_Jansen_on_Boston_City_Hall_Plaza.jpg"
+      ],
+      "videoLinks": ["https://www.youtube.com/watch?v=C97kMKwZ2-g"],
+      "exhibitions": [
+        "Dutch beaches (ongoing)",
+        "Exploratorium, San Francisco, 2016",
+        "Various international museums"
+      ],
+      "referenceUrl": "https://www.strandbeest.com"
+    },
+    {
+      "id": "wave-organ",
+      "artistId": "peter-richards",
+      "title": "The Wave Organ",
+      "year": 1986,
+      "description": "A wave-activated acoustic sculpture built on a jetty in San Francisco Bay. 25 organ pipes made of PVC and concrete are set at various elevations to accommodate tides. Ocean waves push air and water through the pipes, producing haunting, ever-changing sounds. The jetty itself is built from granite and marble salvaged from a demolished cemetery.",
+      "location": "Marina district, San Francisco, USA",
+      "materials": ["PVC pipes", "Concrete", "Salvaged granite and marble"],
+      "dimensions": "Jetty-scale installation",
+      "elements": ["water"],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/b/b4/San_Francisco_Wave_Organ.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/d/d2/Wave_Organ_-_San_Francisco%2C_CA_-_DSC02526.jpg"
+      ],
+      "videoLinks": ["https://www.youtube.com/watch?v=DJvizRKt31o"],
+      "exhibitions": ["Permanent installation, Exploratorium-affiliated"],
+      "referenceUrl": "https://www.exploratorium.edu/exhibits/the-wave-organ"
+    },
+    {
+      "id": "magic-wave",
+      "artistId": "reuben-margolin",
+      "title": "Magic Wave",
+      "year": 2010,
+      "description": "One of the most complex kinetic sculptures in the world: a light blue aluminum grid suspended by 256 cables, animated by 3,000 pulleys, 5 kilometers of steel cable, and 9 motors. Using pure mechanics rather than computers, the sculpture produces four overlapping wave patterns that create almost limitless figurative shapes in constant, mesmerizing motion.",
+      "location": "Technorama, Winterthur, Switzerland",
+      "materials": ["Aluminum rods", "Steel cable", "3,000 pulleys", "9 electric motors"],
+      "dimensions": "Large-scale ceiling-suspended",
+      "elements": ["water", "metal"],
+      "imageUrls": [],
+      "videoLinks": ["https://www.youtube.com/watch?v=IwVpDKait0A"],
+      "exhibitions": ["Permanent installation at Technorama, Winterthur"],
+      "referenceUrl": "https://www.reubenmargolin.com/waves/magic-wave/"
+    },
+    {
+      "id": "sun-tunnels",
+      "artistId": "nancy-holt",
+      "title": "Sun Tunnels",
+      "year": 1973,
+      "description": "Four massive concrete cylinders, each 18 feet long and 9 feet in diameter, arranged in an open cross formation in Utah's Great Basin Desert. Precisely aligned with the summer and winter solstice sunrise and sunset, each tunnel is perforated with holes corresponding to the constellations Capricorn, Columba, Draco, and Perseus, casting star patterns of light inside.",
+      "location": "Great Basin Desert, Utah, USA",
+      "materials": ["Concrete", "Steel"],
+      "dimensions": "Each cylinder: 5.5m long, 2.7m diameter",
+      "elements": ["light", "sun", "sky", "earth"],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/b/b7/Nancy_Holt%2C_Sun_Tunnels%2C_1973-1976.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": ["Permanent installation, Great Basin Desert, Utah"],
+      "referenceUrl": "https://holtsmithsonfoundation.org/sun-tunnels"
+    },
+    {
+      "id": "dark-star-park",
+      "artistId": "nancy-holt",
+      "title": "Dark Star Park",
+      "year": 1984,
+      "description": "An urban park featuring five large gunite spheres, two reflecting pools, metal poles, and permanent shadow patterns embedded in steel on the ground. Each August 1st at 9:32 AM, the actual shadows cast by the poles and spheres align perfectly with the embedded shadow patterns, marking the date in 1860 when the land was first purchased.",
+      "location": "Rosslyn, Arlington, Virginia, USA",
+      "materials": ["Gunite spheres", "Steel", "Asphalt", "Plantings"],
+      "dimensions": "Park encompasses 0.67 acres",
+      "elements": ["light", "sun", "stone", "earth"],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": ["Permanent installation, Arlington County, Virginia"],
+      "referenceUrl": "https://holtsmithsonfoundation.org/dark-star-park"
+    },
+    {
+      "id": "double-negative",
+      "artistId": "michael-heizer",
+      "title": "Double Negative",
+      "year": 1969,
+      "description": "Two enormous trenches cut into facing cliff edges of Mormon Mesa, each 50 feet deep and 30 feet wide, spanning a combined 1,500 feet in length. Created by displacing 244,000 tons of rhyolite and sandstone, the sculpture is the void itself \u2014 defining space through absence while framing the desert sky and distant landscape.",
+      "location": "Mormon Mesa, Overton, Nevada, USA",
+      "materials": ["Rhyolite", "Sandstone (displaced)"],
+      "dimensions": "457m long, 15m deep, 9m wide",
+      "elements": ["earth", "stone"],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/a/a1/Double_Negative_2024_Michael_Heizer.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": ["Permanent installation, owned by MOCA Los Angeles"],
+      "referenceUrl": "https://www.moca.org/exhibition/michael-heizer-double-negative-1969"
+    },
+    {
+      "id": "levitated-mass",
+      "artistId": "michael-heizer",
+      "title": "Levitated Mass",
+      "year": 2012,
+      "description": "A 340-ton granite megalith suspended over a 456-foot-long concrete slot carved into LACMA's north lawn, creating the illusion that the massive boulder floats weightlessly above visitors who walk beneath it. The boulder was transported 105 miles over eleven nights from a quarry in Riverside County.",
+      "location": "Los Angeles County Museum of Art, Los Angeles, USA",
+      "materials": ["Granite boulder (340 tons)", "Concrete"],
+      "dimensions": "139m long slot; boulder 6.5m x 6.7m x 10.6m",
+      "elements": ["stone", "earth"],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/1/17/Michael_Heizer%27s_Levitated_Mass.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": ["Permanent installation at LACMA"],
+      "referenceUrl": "https://www.lacma.org/press/levitated-mass"
+    },
+    {
+      "id": "city-heizer",
+      "artistId": "michael-heizer",
+      "title": "City",
+      "year": 1972,
+      "description": "The largest contemporary artwork ever built, spanning over a mile and a quarter long and a quarter mile wide in a remote Nevada desert valley. Composed of shaped mounds, depressions, and geometric forms made of compacted dirt, rock, and concrete, City draws on ancient Mesoamerican ceremonial architecture and took 50 years to complete.",
+      "location": "Garden Valley, Lincoln County, Nevada, USA",
+      "materials": ["Compacted earth", "Rock", "Concrete"],
+      "dimensions": "~2km long, ~0.4km wide",
+      "elements": ["earth", "stone", "sand"],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": ["Opened September 2, 2022; limited to 6 visitors per day"],
+      "referenceUrl": "https://www.tripleaughtfoundation.org"
+    },
+    {
+      "id": "wheatfield-confrontation",
+      "artistId": "agnes-denes",
+      "title": "Wheatfield \u2014 A Confrontation",
+      "year": 1982,
+      "description": "A 2-acre field of golden wheat planted and harvested on the Battery Park landfill in lower Manhattan, two blocks from Wall Street and adjacent to the World Trade Center. Over four months, 285 hand-furrowed rows grew and yielded nearly 1,000 pounds of grain \u2014 a powerful symbol of food, energy, and mismanagement on some of the most valuable real estate on Earth.",
+      "location": "Battery Park landfill, Manhattan, New York, USA",
+      "materials": ["Wheat seeds", "Soil (200 truckloads)", "Irrigation"],
+      "dimensions": "2 acres (0.8 hectares)",
+      "elements": ["earth", "plants"],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": ["Public Art Fund commission, May-August 1982"],
+      "referenceUrl": "https://www.publicartfund.org/exhibitions/view/wheatfields-for-manhattan/"
+    },
+    {
+      "id": "tree-mountain",
+      "artistId": "agnes-denes",
+      "title": "Tree Mountain \u2014 A Living Time Capsule",
+      "year": 1992,
+      "description": "A monumental earthwork on a human-made mountain 420 meters long, 270 meters wide, and 38 meters high, planted with 11,000 Finnish pine trees by 11,000 people from around the world. Commissioned at the 1992 Earth Summit and protected for four centuries, each planter received an inheritable certificate valid for 20+ generations.",
+      "location": "Pinzio gravel pits, Yl\u00f6j\u00e4rvi, Finland",
+      "materials": ["Earth", "11,000 Finnish pine trees"],
+      "dimensions": "420m x 270m x 38m",
+      "elements": ["earth", "plants"],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/0/0f/Puuvuori_-_Tree_Mountain_1_-_panoramio.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": ["Permanent installation, protected for 400 years"],
+      "referenceUrl": "http://www.agnesdenesstudio.com/works5.html"
+    },
+    {
+      "id": "living-pyramid",
+      "artistId": "agnes-denes",
+      "title": "The Living Pyramid",
+      "year": 2015,
+      "description": "A 30-foot-tall stepped pyramid of stacked wooden terraces filled with soil and planted with thousands of living grasses and flowering annuals, misted by a revolving sprinkler at the apex. Over the exhibition, plants sprouted, flowered, and died, embodying evolution and regeneration.",
+      "location": "Socrates Sculpture Park, Long Island City, New York, USA",
+      "materials": ["Wood", "Soil", "Living grasses and flowers", "Water"],
+      "dimensions": "9m x 9m x 9m",
+      "elements": ["plants", "earth", "water"],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/f/f7/The_Living_Pyramid.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": ["Socrates Sculpture Park 2015", "Documenta 14, Kassel 2017"],
+      "referenceUrl": "https://socratessculpturepark.org/exhibition/pyramid/"
+    },
+    {
+      "id": "shindig",
+      "artistId": "patrick-dougherty",
+      "title": "Shindig",
+      "year": 2015,
+      "description": "Ten towering teardrop-shaped forms made of woven willow saplings installed inside the Renwick Gallery as part of the exhibition 'Wonder.' The whimsical structures flash, careen, and rebound across walls and ceiling, suggesting seeds sending up tendrils to find light.",
+      "location": "Renwick Gallery, Smithsonian, Washington, D.C., USA",
+      "materials": ["Willow saplings"],
+      "dimensions": "4.9m x 27.4m x 3.7m",
+      "elements": ["plants"],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/d/da/Patrick_Dougherty_Shindig_.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": ["WONDER exhibition, Renwick Gallery, 2015-2016"],
+      "referenceUrl": "https://americanart.si.edu/exhibitions/wonder/online/patrick-dougherty"
+    },
+    {
+      "id": "the-royals",
+      "artistId": "patrick-dougherty",
+      "title": "The Royals",
+      "year": 2016,
+      "description": "A site-specific installation of woven sapling structures nestled among the tropical gardens of McKee Botanical Garden, built over three weeks with community volunteers. The organic, towering forms rise from the earth like fantastical architecture grown from the surrounding vegetation.",
+      "location": "McKee Botanical Garden, Vero Beach, Florida, USA",
+      "materials": ["Tree saplings"],
+      "dimensions": "Site-specific, multiple structures",
+      "elements": ["plants"],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/a/ac/The_Royals_by_Patrick_Dougherty%2C_2016_-_McKee_Botanical_Garden_-_Vero_Beach%2C_Florida_-_DSC03262.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": ["McKee Botanical Garden, 2016"],
+      "referenceUrl": "http://www.stickwork.net/work"
+    },
+    {
+      "id": "sky-ladder",
+      "artistId": "cai-guo-qiang",
+      "title": "Sky Ladder",
+      "year": 2015,
+      "description": "A 500-meter-tall ladder of fire ascending into the pre-dawn sky, lifted by a helium balloon. Coated in quick-burning fuses and gold fireworks, the 5.5-meter-wide ladder blazed for 2.5 minutes \u2014 a gift for the artist's 100-year-old grandmother, realized after three failed attempts over two decades.",
+      "location": "Huiyu Island Harbour, Quanzhou, Fujian, China",
+      "materials": ["Metal wire", "Aluminum", "Gunpowder fuses", "Gold fireworks", "Helium balloon"],
+      "dimensions": "500m tall, 5.5m wide",
+      "elements": ["fire", "sky", "air"],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": ["Huiyu Island, Quanzhou, June 15, 2015"],
+      "referenceUrl": "https://caiguoqiang.com/projects/projects-2015/sky-ladder/"
+    },
+    {
+      "id": "transient-rainbow",
+      "artistId": "cai-guo-qiang",
+      "title": "Transient Rainbow",
+      "year": 2002,
+      "description": "A monumental arc of 1,000 computer-chip-fitted fireworks creating a rainbow 500 feet wide and 120 feet high over the East River between Manhattan and Queens. Traveling at 100 feet per second, the thundering rainbow lasted just 15 seconds, realized for the opening of MoMA's temporary Queens location.",
+      "location": "East River, New York, USA",
+      "materials": ["1,000 computer-chip firework shells"],
+      "dimensions": "152m wide, 37m high",
+      "elements": ["fire", "light", "sky"],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/5/51/Cai_Guo_Qiang_installation%2C_Guggenheim%2C_New_York%2C_11_Feb._2008_%282259172350%29.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": ["MoMA QNS opening, June 29, 2002"],
+      "referenceUrl": "https://caiguoqiang.com/projects/projects-2002/transient-rainbow/"
+    },
+    {
+      "id": "footprints-of-history",
+      "artistId": "cai-guo-qiang",
+      "title": "Footprints of History",
+      "year": 2008,
+      "description": "Twenty-nine giant firework 'footprints' flew sequentially over the Beijing skyline during the Opening Ceremony of the 2008 Olympic Games, tracing a path from the ancient city center to the Bird's Nest Stadium. Each footprint symbolized one of the 29 Olympiads, creating an explosive visual narrative before a global audience of billions.",
+      "location": "Beijing skyline, Beijing, China",
+      "materials": ["Fireworks", "Pyrotechnic shells"],
+      "dimensions": "Multi-kilometer trajectory across Beijing",
+      "elements": ["fire", "sky"],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/6/61/Explosion_Event_by_Cai_Guo-Qiang001.JPG"
+      ],
+      "videoLinks": [],
+      "exhibitions": ["2008 Beijing Olympic Games Opening Ceremony"],
+      "referenceUrl": "https://caiguoqiang.com/projects/projects-2008/"
+    },
+    {
+      "id": "four-squares-in-square",
+      "artistId": "george-rickey",
+      "title": "Four Squares in a Square",
+      "year": 1969,
+      "description": "Four large stainless steel squares rotating independently on a central pivot, their movements dictated entirely by wind. Commissioned for Mies van der Rohe's Neue Nationalgalerie plaza in Berlin, the sculpture's slow, unpredictable choreography creates an ever-changing geometric composition against the sky.",
+      "location": "Neue Nationalgalerie, Berlin, Germany",
+      "materials": ["Stainless steel"],
+      "dimensions": "7.6m tall",
+      "elements": ["wind", "metal"],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/e/ed/George_Rickey_-_Vier_Vierecke_im_Geviert_02.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": ["Permanent installation, Neue Nationalgalerie, Berlin"],
+      "referenceUrl": "https://www.georgerickey.org/art/four-squares-in-a-square"
+    },
+    {
+      "id": "two-lines-oblique",
+      "artistId": "george-rickey",
+      "title": "Two Lines Oblique",
+      "year": 1968,
+      "description": "Two 9-meter tapered stainless steel blades balanced on a single point, sweeping through slow, wide arcs driven entirely by wind. The monumental scale and glacial movement create an almost meditative experience of watching invisible air currents made tangible through polished metal.",
+      "location": "Empire State Plaza, Albany, New York, USA",
+      "materials": ["Stainless steel"],
+      "dimensions": "9m tall blades",
+      "elements": ["wind", "metal"],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/2/22/George_Rickey_-_Three_Squares_Vertical_Diagonal_%2826717993421%29.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": ["Empire State Plaza, Albany (permanent)"],
+      "referenceUrl": "https://www.georgerickey.org"
+    },
+    {
+      "id": "gift-of-the-wind",
+      "artistId": "susumu-shingu",
+      "title": "Gift of the Wind",
+      "year": 1985,
+      "description": "A towering kinetic sculpture with three red wings that rotate gracefully in the wind, installed above a subway station. The bright forms spin and dance against the sky, bringing movement and life to the daily commute of thousands of passengers.",
+      "location": "Porter Square Station, Cambridge, Massachusetts, USA",
+      "materials": ["Painted aluminum", "Stainless steel"],
+      "dimensions": "Site-specific",
+      "elements": ["wind"],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": ["Permanent installation, MBTA Porter Square Station"],
+      "referenceUrl": "https://susumushingu.com/en/"
+    },
+    {
+      "id": "wind-caravan",
+      "artistId": "susumu-shingu",
+      "title": "Wind Caravan",
+      "year": 2000,
+      "description": "Twenty-one wind sculptures exhibited across six countries on six continents, from the Sahara Desert to Antarctica, from Mongolia to the Strait of Magellan. Each sculpture was placed in the world's most extreme wind landscapes, documenting how the same invisible force manifests differently in every environment on Earth.",
+      "location": "Six continents worldwide",
+      "materials": ["Lightweight metals", "Fabric"],
+      "dimensions": "Variable",
+      "elements": ["wind", "air"],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/b/ba/Susumu_Shingu_White_Forest_1.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": ["Morocco, Mongolia, Patagonia, Antarctica, Finland, Japan (2000-2001)"],
+      "referenceUrl": "https://susumushingu.com/en/"
+    },
+    {
+      "id": "museum-of-the-moon",
+      "artistId": "luke-jerram",
+      "title": "Museum of the Moon",
+      "year": 2016,
+      "description": "A 7-meter internally illuminated sphere featuring 120dpi detailed NASA imagery of the lunar surface at a scale of 1:500,000, where each centimeter represents 5 kilometers. Presented with a surround sound composition by Dan Jones, the touring installation has been exhibited over 350 times in 40+ countries.",
+      "location": "Touring worldwide",
+      "materials": ["Printed fabric sphere", "Internal illumination", "Surround sound"],
+      "dimensions": "7m diameter",
+      "elements": ["light", "sky"],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/3/35/Moon_Installation_2018.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": ["350+ presentations in 40+ countries since 2016"],
+      "referenceUrl": "https://my-moon.org/"
+    },
+    {
+      "id": "gaia",
+      "artistId": "luke-jerram",
+      "title": "Gaia",
+      "year": 2018,
+      "description": "A 7-meter slowly revolving Earth sphere using detailed NASA imagery, designed to evoke the Overview Effect \u2014 the cognitive shift astronauts experience upon seeing Earth from space. Floating in large interior spaces, it gives viewers a perspective of our planet previously available only from orbit.",
+      "location": "Touring worldwide",
+      "materials": ["Printed fabric sphere", "Internal illumination", "Motor"],
+      "dimensions": "7m diameter",
+      "elements": ["light", "earth"],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/0/0f/Gaia%2C_by_Luke_Jerram.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": ["Touring internationally since 2018"],
+      "referenceUrl": "https://www.lukejerram.com/gaia/"
+    },
+    {
+      "id": "forgotten-streams",
+      "artistId": "cristina-iglesias",
+      "title": "Forgotten Streams",
+      "year": 2017,
+      "description": "A 40-meter bronze riverbed evoking the lost Walbrook River that once flowed beneath the City of London. Water surges and recedes through three intricately cast bronze channels set into the plaza floor of Bloomberg's European headquarters, revealing a hidden aquatic world beneath the surface of the financial district.",
+      "location": "Bloomberg European HQ, London, UK",
+      "materials": ["Cast bronze", "Water", "Pumps"],
+      "dimensions": "40m long, three connected pools",
+      "elements": ["water", "metal"],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/9/9a/%22Forgotten_Streams%22_with_buildings_behind.jpg"
+      ],
+      "videoLinks": ["https://www.youtube.com/watch?v=GiYVXAnMAKM"],
+      "exhibitions": ["Permanent installation, Bloomberg European HQ, London"],
+      "referenceUrl": "https://cristinaiglesias.com"
+    },
+    {
+      "id": "tres-aguas",
+      "artistId": "cristina-iglesias",
+      "title": "Tres Aguas",
+      "year": 2014,
+      "description": "A trilogy of water installations distributed across the historic city of Toledo, Spain: a subterranean pool in the Convent of Santa Clara, a cascading bronze well in the Plaza del Ayuntamiento, and a monumental fountain near the Tagus River. Together they trace water's journey through the ancient city, from source to river.",
+      "location": "Toledo, Spain",
+      "materials": ["Cast bronze", "Water", "Stone"],
+      "dimensions": "Three site-specific installations across the city",
+      "elements": ["water", "metal", "stone"],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/8/8d/Reflejo_Catedral_de_Toledo_en_Fuente_Tres_Aguas_--_2014_--_Toledo%2C_Espa%C3%B1a_01.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": ["Permanent installation, commissioned by Artangel"],
+      "referenceUrl": "https://cristinaiglesias.com"
+    },
+    {
+      "id": "landscape-fog-horns",
+      "artistId": "bill-fontana",
+      "title": "Landscape Sculpture with Fog Horns",
+      "year": 1982,
+      "description": "Live audio from eight fog horns positioned around San Francisco Bay was transmitted via telephone lines and broadcast from loudspeakers at Fort Mason. The displaced sounds of distant fog horns created a sculptural soundscape, transforming an urban park into an acoustic landscape of the entire Bay.",
+      "location": "Fort Mason, San Francisco, USA",
+      "materials": ["Microphones", "Telephone lines", "Loudspeakers"],
+      "dimensions": "Bay-wide sound network",
+      "elements": ["water", "mist", "wind"],
+      "imageUrls": [],
+      "videoLinks": ["https://www.youtube.com/watch?v=7bpmVXoWNsA"],
+      "exhibitions": ["Fort Mason, San Francisco, 1982"],
+      "referenceUrl": "https://www.resoundings.info"
+    },
+    {
+      "id": "silent-echoes-notre-dame",
+      "artistId": "bill-fontana",
+      "title": "Silent Echoes: Notre-Dame",
+      "year": 2022,
+      "description": "A 10-channel sound installation capturing the hidden acoustic life of Notre-Dame's bells during the cathedral's post-fire restoration. Accelerometers attached to the bells recorded their resonance and decay, bringing the living voice of the damaged cathedral to listeners at the Centre Pompidou.",
+      "location": "Centre Pompidou, Paris, France",
+      "materials": ["Accelerometers", "10-channel loudspeaker array"],
+      "dimensions": "Room-scale installation",
+      "elements": ["metal", "air"],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": ["Centre Pompidou, Paris, 2022"],
+      "referenceUrl": "https://www.resoundings.info"
+    }
+  ]
+};
+// ============================================================
+// DataStore — loads data, manages state, filtering
+// ============================================================
+class DataStore {
+  constructor() {
+    this.artists = [];
+    this.artworks = [];
+    this.elements = [];
+    this._filteredArtworks = [];
+  }
+
+  async load() {
+    let data;
+    if (typeof EMBEDDED_DATA !== 'undefined') {
+      data = EMBEDDED_DATA;
+    } else {
+      const res = await fetch('data.json');
+      if (!res.ok) throw new Error('Failed to load data.json');
+      data = await res.json();
+    }
+    this.artists = data.artists || [];
+    this.artworks = data.artworks || [];
+    this.elements = data.elements || [];
+    this._filteredArtworks = [...this.artworks];
+    return data;
+  }
+
+  getArtist(id) {
+    return this.artists.find(a => a.id === id);
+  }
+
+  getArtwork(id) {
+    return this.artworks.find(a => a.id === id);
+  }
+
+  getArtworksByArtist(artistId) {
+    return this.artworks.filter(a => a.artistId === artistId);
+  }
+
+  getElement(id) {
+    return this.elements.find(e => e.id === id);
+  }
+
+  filterArtworks(activeElements, mode = 'OR') {
+    if (!activeElements || activeElements.length === 0) {
+      this._filteredArtworks = [...this.artworks];
+    } else if (mode === 'AND') {
+      this._filteredArtworks = this.artworks.filter(aw =>
+        activeElements.every(el => aw.elements?.includes(el))
+      );
+    } else {
+      this._filteredArtworks = this.artworks.filter(aw =>
+        activeElements.some(el => aw.elements?.includes(el))
+      );
+    }
+    document.dispatchEvent(new CustomEvent('dataFiltered', {
+      detail: { artworks: this._filteredArtworks, activeElements, mode }
+    }));
+    return this._filteredArtworks;
+  }
+
+  get filteredArtworks() {
+    return this._filteredArtworks;
+  }
+}
+
+// ============================================================
+// FilterBar — element chips, AND/OR toggle, clear
+// ============================================================
+class FilterBar {
+  constructor(store) {
+    this.store = store;
+    this.container = document.getElementById('filter-bar');
+    this.activeElements = new Set();
+    this.mode = 'OR';
+  }
+
+  render() {
+    const elements = this.store.elements;
+    let html = '';
+
+    // Element chips
+    elements.forEach(el => {
+      html += `<button class="filter-chip" data-element="${el.id}" data-color="${el.color}">
+        <span class="chip-icon">${el.icon}</span>${el.label}
+      </button>`;
+    });
+
+    // Divider
+    html += '<div class="filter-divider"></div>';
+
+    // AND/OR toggle
+    html += `<div class="filter-logic-toggle">
+      <button data-mode="OR" class="active">OR</button>
+      <button data-mode="AND">AND</button>
+    </div>`;
+
+    // Clear button
+    html += `<button class="filter-clear-btn" id="filter-clear">Clear</button>`;
+
+    // Count
+    html += `<span class="filter-count" id="filter-count">${this.store.artworks.length} works</span>`;
+
+    this.container.innerHTML = html;
+    this._bindEvents();
+  }
+
+  _bindEvents() {
+    // Chip clicks
+    this.container.querySelectorAll('.filter-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const el = chip.dataset.element;
+        if (this.activeElements.has(el)) {
+          this.activeElements.delete(el);
+          chip.classList.remove('active');
+          chip.style.background = '';
+          chip.style.borderColor = '';
+          chip.style.boxShadow = '';
+          chip.style.color = '';
+        } else {
+          this.activeElements.add(el);
+          const color = chip.dataset.color;
+          chip.classList.add('active');
+          chip.style.background = `${color}33`;
+          chip.style.borderColor = `${color}88`;
+          chip.style.boxShadow = `0 0 12px ${color}40`;
+          chip.style.color = '#fff';
+        }
+        this._applyFilter();
+      });
+    });
+
+    // AND/OR toggle
+    this.container.querySelectorAll('.filter-logic-toggle button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        this.container.querySelectorAll('.filter-logic-toggle button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        this.mode = btn.dataset.mode;
+        this._applyFilter();
+      });
+    });
+
+    // Clear
+    this.container.querySelector('#filter-clear')?.addEventListener('click', () => {
+      this.activeElements.clear();
+      this.container.querySelectorAll('.filter-chip').forEach(c => {
+        c.classList.remove('active');
+        c.style.background = '';
+        c.style.borderColor = '';
+        c.style.boxShadow = '';
+        c.style.color = '';
+      });
+      this._applyFilter();
+    });
+  }
+
+  _applyFilter() {
+    const result = this.store.filterArtworks([...this.activeElements], this.mode);
+    const countEl = document.getElementById('filter-count');
+    if (countEl) countEl.textContent = `${result.length} work${result.length !== 1 ? 's' : ''}`;
+  }
+}
+
+// ============================================================
+// GalleryGrid — masonry card rendering with lazy images
+// ============================================================
+class GalleryGrid {
+  constructor(store, modal) {
+    this.store = store;
+    this.modal = modal;
+    this.container = document.getElementById('gallery-grid');
+    this.observer = null;
+    this._setupLazyLoader();
+  }
+
+  _setupLazyLoader() {
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          const src = img.dataset.src;
+          if (src) {
+            img.src = src;
+            img.onload = () => img.setAttribute('data-loaded', 'true');
+            img.onerror = () => {
+              img.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" fill="%23222"><rect width="400" height="300"/><text x="200" y="150" text-anchor="middle" fill="%23555" font-size="16">Image unavailable</text></svg>';
+              img.setAttribute('data-loaded', 'true');
+            };
+            delete img.dataset.src;
+          }
+          this.observer.unobserve(img);
+        }
+      });
+    }, { rootMargin: '200px' });
+  }
+
+  render(artworks) {
+    const list = artworks || this.store.filteredArtworks;
+
+    if (list.length === 0) {
+      this.container.innerHTML = `
+        <div class="gallery-empty">
+          <div class="gallery-empty__icon">🍃</div>
+          <div class="gallery-empty__title">No artworks match your filters</div>
+          <div class="gallery-empty__text">Try selecting different elements or switching between AND/OR mode.</div>
+        </div>`;
+      return;
+    }
+
+    this.container.innerHTML = list.map((aw, i) => {
+      const artist = this.store.getArtist(aw.artistId);
+      const imgUrl = aw.imageUrls?.[0] || '';
+      const hasImage = aw.imageUrls && aw.imageUrls.length > 0;
+      const elementDots = (aw.elements || []).map(elId => {
+        const el = this.store.getElement(elId);
+        return el ? `<span class="gallery-card__element-dot" style="background:${el.color}" title="${el.label}"></span>` : '';
+      }).join('');
+
+      const imageContent = hasImage
+        ? `<img class="gallery-card__image" data-src="${imgUrl}" data-loaded="false" alt="${aw.title}" loading="lazy">`
+        : `<div class="gallery-card__placeholder">
+            <div class="gallery-card__placeholder-icon">${(aw.elements || []).map(elId => { const el = this.store.getElement(elId); return el ? el.icon : ''; }).join(' ') || '🎨'}</div>
+            <div class="gallery-card__placeholder-title">${aw.title}</div>
+            <div class="gallery-card__placeholder-artist">${artist?.name || ''}, ${aw.year}</div>
+            ${aw.referenceUrl ? `<a href="${aw.referenceUrl}" target="_blank" rel="noopener" class="gallery-card__placeholder-link" onclick="event.stopPropagation()">View artwork &rarr;</a>` : ''}
+          </div>`;
+
+      return `<div class="gallery-card fade-in stagger${!hasImage ? ' gallery-card--no-image' : ''}" data-artwork-id="${aw.id}" style="animation-delay:${Math.min(i * 0.04, 1.2)}s">
+        <div class="gallery-card__image-wrap">
+          ${imageContent}
+        </div>
+        <div class="gallery-card__overlay">
+          <div class="gallery-card__title">${aw.title}</div>
+          <div class="gallery-card__artist">${artist?.name || 'Unknown'}</div>
+          <div class="gallery-card__year">${aw.year}</div>
+          <div class="gallery-card__elements">${elementDots}</div>
+        </div>
+      </div>`;
+    }).join('');
+
+    // Observe all lazy images
+    this.container.querySelectorAll('img[data-src]').forEach(img => {
+      this.observer.observe(img);
+    });
+
+    // Click handler via delegation
+    this.container.onclick = (e) => {
+      const card = e.target.closest('.gallery-card');
+      if (card) {
+        this.modal.open(card.dataset.artworkId);
+      }
+    };
+  }
+
+  listen() {
+    document.addEventListener('dataFiltered', (e) => {
+      this.render(e.detail.artworks);
+    });
+  }
+}
+
+// ============================================================
+// Slideshow — full-screen view with navigation
+// ============================================================
+class Slideshow {
+  constructor(store, modal) {
+    this.store = store;
+    this.modal = modal;
+    this.el = document.getElementById('slideshow');
+    this.imageEl = document.getElementById('slideshow-image');
+    this.titleEl = document.getElementById('slideshow-title');
+    this.artistEl = document.getElementById('slideshow-artist');
+    this.counterEl = document.getElementById('slideshow-counter');
+    this.progressEl = document.getElementById('slideshow-progress');
+    this.index = 0;
+    this.active = false;
+    this._bindEvents();
+  }
+
+  _bindEvents() {
+    document.getElementById('slideshow-close').addEventListener('click', () => this.close());
+    document.getElementById('slideshow-prev').addEventListener('click', () => this.prev());
+    document.getElementById('slideshow-next').addEventListener('click', () => this.next());
+
+    this.imageEl.addEventListener('click', () => {
+      const artworks = this.store.filteredArtworks;
+      if (artworks[this.index]) {
+        this.modal.open(artworks[this.index].id);
+      }
+    });
+    this.imageEl.style.cursor = 'pointer';
+
+    document.addEventListener('keydown', (e) => {
+      if (!this.active) return;
+      if (e.key === 'Escape') this.close();
+      if (e.key === 'ArrowLeft') this.prev();
+      if (e.key === 'ArrowRight') this.next();
+    });
+  }
+
+  open(startIndex = 0) {
+    this.index = startIndex;
+    this.active = true;
+    this.el.classList.add('active');
+    document.body.classList.add('no-scroll');
+    this._show();
+  }
+
+  close() {
+    this.active = false;
+    this.el.classList.remove('active');
+    document.body.classList.remove('no-scroll');
+  }
+
+  prev() {
+    const len = this.store.filteredArtworks.length;
+    if (len === 0) return;
+    this.index = (this.index - 1 + len) % len;
+    this._transition();
+  }
+
+  next() {
+    const len = this.store.filteredArtworks.length;
+    if (len === 0) return;
+    this.index = (this.index + 1) % len;
+    this._transition();
+  }
+
+  _transition() {
+    this.imageEl.classList.add('transitioning');
+    setTimeout(() => {
+      this._show();
+      this.imageEl.classList.remove('transitioning');
+    }, 300);
+  }
+
+  _show() {
+    const artworks = this.store.filteredArtworks;
+    const aw = artworks[this.index];
+    if (!aw) return;
+    const artist = this.store.getArtist(aw.artistId);
+    const imgUrl = aw.imageUrls?.[0] || '';
+    this.imageEl.src = imgUrl;
+    this.imageEl.alt = aw.title;
+    this.imageEl.style.display = imgUrl ? '' : 'none';
+    this.titleEl.textContent = aw.title;
+    this.artistEl.textContent = `${artist?.name || 'Unknown'}, ${aw.year}`;
+    this.counterEl.textContent = `${this.index + 1} / ${artworks.length}`;
+    const pct = artworks.length > 1 ? ((this.index) / (artworks.length - 1)) * 100 : 100;
+    this.progressEl.style.width = pct + '%';
+  }
+
+  listen() {
+    document.addEventListener('dataFiltered', () => {
+      if (this.active) {
+        this.index = 0;
+        this._show();
+      }
+    });
+  }
+}
+
+// ============================================================
+// ArtworkModal — detail overlay with carousel
+// ============================================================
+class ArtworkModal {
+  constructor(store) {
+    this.store = store;
+    this.backdrop = document.getElementById('modal-backdrop');
+    this.modal = document.getElementById('artwork-modal');
+    this.scrollEl = document.getElementById('modal-scroll');
+    this.currentArtwork = null;
+    this.carouselIndex = 0;
+    this._bindEvents();
+  }
+
+  _bindEvents() {
+    document.getElementById('modal-close').addEventListener('click', () => this.close());
+    this.backdrop.addEventListener('click', () => this.close());
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && this.modal.classList.contains('active')) {
+        this.close();
+      }
+    });
+  }
+
+  open(artworkId) {
+    const aw = this.store.getArtwork(artworkId);
+    if (!aw) return;
+    this.currentArtwork = aw;
+    this.carouselIndex = 0;
+    const artist = this.store.getArtist(aw.artistId);
+
+    const images = aw.imageUrls || [];
+    const hasMultipleImages = images.length > 1;
+
+    let carouselHTML;
+    if (images.length > 0) {
+      carouselHTML = `<div class="modal__carousel">
+        <div class="modal__carousel-track" id="carousel-track">
+          ${images.map(url => `<div class="modal__carousel-slide"><img src="${url}" alt="${aw.title}"></div>`).join('')}
+        </div>
+        ${hasMultipleImages ? `
+          <button class="modal__carousel-arrow modal__carousel-arrow--prev" id="carousel-prev">&#8249;</button>
+          <button class="modal__carousel-arrow modal__carousel-arrow--next" id="carousel-next">&#8250;</button>
+          <div class="modal__carousel-dots" id="carousel-dots">
+            ${images.map((_, i) => `<button class="modal__carousel-dot${i === 0 ? ' active' : ''}" data-index="${i}"></button>`).join('')}
+          </div>
+        ` : ''}
+      </div>`;
+    } else {
+      const elIcons = (aw.elements || []).map(elId => { const el = this.store.getElement(elId); return el ? el.icon : ''; }).join(' ');
+      carouselHTML = `<div class="modal__no-image">
+        <div class="modal__no-image-icon">${elIcons || '🎨'}</div>
+        <div class="modal__no-image-text">No photograph available</div>
+        ${aw.referenceUrl ? `<a href="${aw.referenceUrl}" target="_blank" rel="noopener" class="modal__reference-link">View on artist's website &rarr;</a>` : ''}
+      </div>`;
+    }
+
+    const elementsHTML = (aw.elements || []).map(elId => {
+      const el = this.store.getElement(elId);
+      return el ? `<span class="modal__element-chip"><span>${el.icon}</span> ${el.label}</span>` : '';
+    }).join('');
+
+    const materialsHTML = (aw.materials || []).map(m => `<span class="modal__element-chip">${m}</span>`).join('');
+
+    const exhibitionsHTML = (aw.exhibitions || []).map(ex =>
+      `<div class="modal__exhibition-item">${ex}</div>`
+    ).join('');
+
+    const videosHTML = (aw.videoLinks || []).filter(v => v).map(v =>
+      `<a href="${v}" target="_blank" rel="noopener" class="modal__video-link">
+        <span class="modal__video-link-icon">&#9654;</span> Watch Video
+      </a>`
+    ).join('');
+
+    this.scrollEl.innerHTML = `
+      ${carouselHTML}
+      <div class="modal__details">
+        <h2 class="modal__title">${aw.title}</h2>
+        <div class="modal__meta">
+          <span class="modal__artist">${artist?.name || 'Unknown'}</span>
+          <span class="modal__year">${aw.year}</span>
+        </div>
+        <p class="modal__description">${aw.description || ''}</p>
+        <div class="modal__fields-grid">
+          ${aw.location ? `<div class="modal__field"><div class="modal__field-label">Location</div><div class="modal__field-value">${aw.location}</div></div>` : ''}
+          ${aw.dimensions ? `<div class="modal__field"><div class="modal__field-label">Dimensions</div><div class="modal__field-value">${aw.dimensions}</div></div>` : ''}
+        </div>
+        ${materialsHTML ? `<div class="modal__field"><div class="modal__field-label">Materials</div><div class="modal__elements">${materialsHTML}</div></div>` : ''}
+        ${elementsHTML ? `<div class="modal__field"><div class="modal__field-label">Elements</div><div class="modal__elements">${elementsHTML}</div></div>` : ''}
+        ${exhibitionsHTML ? `<div><div class="modal__section-title">Exhibitions</div><div class="modal__exhibitions">${exhibitionsHTML}</div></div>` : ''}
+        ${videosHTML ? `<div><div class="modal__section-title">Videos</div><div class="modal__video-links">${videosHTML}</div></div>` : ''}
+        ${aw.referenceUrl ? `<div><div class="modal__section-title">Reference</div><a href="${aw.referenceUrl}" target="_blank" rel="noopener" class="modal__reference-link">View on artist's website &rarr;</a></div>` : ''}
+      </div>
+    `;
+
+    // Carousel events
+    if (hasMultipleImages) {
+      document.getElementById('carousel-prev')?.addEventListener('click', () => this._carouselGo(this.carouselIndex - 1));
+      document.getElementById('carousel-next')?.addEventListener('click', () => this._carouselGo(this.carouselIndex + 1));
+      document.getElementById('carousel-dots')?.addEventListener('click', (e) => {
+        const dot = e.target.closest('.modal__carousel-dot');
+        if (dot) this._carouselGo(parseInt(dot.dataset.index));
+      });
+    }
+
+    this.backdrop.classList.add('active');
+    this.modal.classList.add('active');
+    document.body.classList.add('no-scroll');
+  }
+
+  _carouselGo(index) {
+    const images = this.currentArtwork?.imageUrls || [];
+    if (images.length === 0) return;
+    this.carouselIndex = ((index % images.length) + images.length) % images.length;
+    const track = document.getElementById('carousel-track');
+    if (track) track.style.transform = `translateX(-${this.carouselIndex * 100}%)`;
+    document.querySelectorAll('#carousel-dots .modal__carousel-dot').forEach((dot, i) => {
+      dot.classList.toggle('active', i === this.carouselIndex);
+    });
+  }
+
+  close() {
+    this.backdrop.classList.remove('active');
+    this.modal.classList.remove('active');
+    document.body.classList.remove('no-scroll');
+    this.currentArtwork = null;
+  }
+}
+
+// ============================================================
+// ViewToggle — grid/slideshow switching
+// ============================================================
+class ViewToggle {
+  constructor(gallery, slideshow) {
+    this.gallery = gallery;
+    this.slideshow = slideshow;
+    this.container = document.getElementById('view-toggle');
+    this.currentView = 'grid';
+    this._bindEvents();
+  }
+
+  _bindEvents() {
+    this.container.addEventListener('click', (e) => {
+      const btn = e.target.closest('.view-toggle__btn');
+      if (!btn) return;
+      const view = btn.dataset.view;
+      if (view === this.currentView) return;
+      this.currentView = view;
+      this.container.querySelectorAll('.view-toggle__btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      if (view === 'slideshow') {
+        this.slideshow.open(0);
+      } else {
+        this.slideshow.close();
+      }
+    });
+  }
+}
+
+// ============================================================
+// App — initialization orchestrator
+// ============================================================
+class App {
+  async init() {
+    // Show loading
+    const loadingEl = document.getElementById('loading');
+    const galleryEl = document.getElementById('gallery-grid');
+    loadingEl.style.display = '';
+    loadingEl.innerHTML = Array.from({ length: 8 }, (_, i) =>
+      `<div class="skeleton-card">
+        <div class="skeleton-card__image" style="height:${200 + (i % 3) * 80}px"></div>
+        <div class="skeleton-card__body">
+          <div class="skeleton-line skeleton-line--medium"></div>
+          <div class="skeleton-line skeleton-line--short"></div>
+        </div>
+      </div>`
+    ).join('');
+    galleryEl.style.display = 'none';
+
+    try {
+      // Load data
+      const store = new DataStore();
+      await store.load();
+
+      // Create components
+      const modal = new ArtworkModal(store);
+      const filterBar = new FilterBar(store);
+      const gallery = new GalleryGrid(store, modal);
+      const slideshow = new Slideshow(store, modal);
+      const viewToggle = new ViewToggle(gallery, slideshow);
+      // Render
+      filterBar.render();
+      gallery.render();
+      gallery.listen();
+      slideshow.listen();
+
+      // Header scroll effect
+      window.addEventListener('scroll', () => {
+        document.getElementById('header').classList.toggle('scrolled', window.scrollY > 10);
+      });
+
+      // Remove loading, show gallery
+      loadingEl.style.display = 'none';
+      galleryEl.style.display = '';
+    } catch (err) {
+      loadingEl.innerHTML = `<div class="gallery-empty">
+        <div class="gallery-empty__icon">&#9888;</div>
+        <div class="gallery-empty__title">Failed to load</div>
+        <div class="gallery-empty__text">${err.message}. Make sure you're serving this via HTTP (not file://).</div>
+      </div>`;
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => new App().init());
+</script>
+</body>
+</html>
