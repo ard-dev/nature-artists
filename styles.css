@@ -481,6 +481,28 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 50%;
 }
 
+.gallery-card__search {
+  position: absolute;
+  top: -28px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.gallery-card__search:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.15);
+}
+
 /* Persistent overlay on mobile since no hover */
 @media (hover: none) {
   .gallery-card__overlay {

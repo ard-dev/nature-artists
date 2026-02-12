@@ -301,6 +301,7 @@ class GalleryGrid {
           <div class="gallery-card__artist">${artist?.name || 'Unknown'}</div>
           <div class="gallery-card__year">${aw.year}</div>
           <div class="gallery-card__elements">${elementDots}</div>
+          <a href="https://www.google.com/search?q=${encodeURIComponent((artist?.name || '') + ' ' + aw.title)}" target="_blank" rel="noopener" class="gallery-card__search" onclick="event.stopPropagation()" title="Search Google">&#128269;</a>
         </div>
       </div>`;
     }).join('');
