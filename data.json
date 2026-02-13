@@ -407,6 +407,76 @@
       "website": "https://www.resoundings.info",
       "portraitUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Prix_Ars_Electronical_2013_21_Bill_Fontana.jpg",
       "tags": ["water", "wind"]
+    },
+    {
+      "id": "christo-jeanne-claude",
+      "name": "Christo and Jeanne-Claude",
+      "born": 1935,
+      "nationality": "Bulgarian-American / French-American",
+      "bio": "Christo Vladimirov Javacheff and Jeanne-Claude Denat de Guillebon, both born on the same day in 1935, created monumental environmental artworks that transformed landscapes and iconic structures by wrapping them in fabric. Their large-scale, site-specific installations surrounded islands in pink polypropylene, draped entire coastlines, and turned Central Park into a saffron river of billowing gates.",
+      "website": "https://christojeanneclaude.net",
+      "portraitUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Jean-Claude_and_Christo%2C_May_2009_%284%29_%28cropped%29.jpg",
+      "tags": ["earth", "water", "wind", "fiber"]
+    },
+    {
+      "id": "richard-long",
+      "name": "Richard Long",
+      "born": 1945,
+      "nationality": "British",
+      "bio": "Sir Richard Long is a pioneering British land artist who has made walking itself an art form since 1967, creating sculptures from stones, mud, and the traces of his footsteps across landscapes from the Sahara to the Himalayas. His geometric arrangements of natural materials and his mud paintings distill the essence of a journey into timeless, elemental forms.",
+      "website": "http://www.richardlong.org",
+      "portraitUrl": "https://upload.wikimedia.org/wikipedia/commons/2/22/Small_White_Pebble_Circles_Long_Tate_Modern_T07160.jpg",
+      "tags": ["stone", "earth", "water", "plants"]
+    },
+    {
+      "id": "jim-denevan",
+      "name": "Jim Denevan",
+      "born": 1961,
+      "nationality": "American",
+      "bio": "Jim Denevan creates monumental ephemeral land art by drawing vast geometric and Fibonacci-inspired compositions on beaches, dry lake beds, and frozen lakes using nothing more than a stick or rake. His sand drawings, which can span miles and are erased by tides or wind, include the world's largest single artwork created on the frozen surface of Siberia's Lake Baikal.",
+      "website": "https://jimdenevan.com",
+      "portraitUrl": "",
+      "tags": ["sand", "earth", "ice"]
+    },
+    {
+      "id": "cornelia-konrads",
+      "name": "Cornelia Konrads",
+      "born": 1957,
+      "nationality": "German",
+      "bio": "Cornelia Konrads creates gravity-defying site-specific installations in forests, parks, and gardens worldwide, using found natural materials such as stones, branches, and logs that appear to float, disintegrate, or defy physics. Her works merge seamlessly with their surroundings, transforming landscapes into places of magical suspension between the earthbound and the ethereal.",
+      "website": "https://www.cokonrads.de",
+      "portraitUrl": "",
+      "tags": ["stone", "earth", "plants"]
+    },
+    {
+      "id": "charles-jencks",
+      "name": "Charles Jencks",
+      "born": 1939,
+      "nationality": "American",
+      "bio": "Charles Jencks was a cultural theorist and landscape architect who created massive earthwork gardens inspired by modern cosmology, fractal geometry, and the story of the universe. His monumental landform sculptures in Scotland, including the Garden of Cosmic Speculation and Crawick Multiverse, reshape terrain into spiraling hills and sculpted lakes that embody scientific narratives at a breathtaking scale.",
+      "website": "https://www.charlesjencks.com",
+      "portraitUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Jencks_046_b%26w.jpg",
+      "tags": ["earth", "water", "stone"]
+    },
+    {
+      "id": "nikolay-polissky",
+      "name": "Nikolay Polissky",
+      "born": 1957,
+      "nationality": "Russian",
+      "bio": "Nikolay Polissky builds towering, fantastical structures from natural and rural materials in the Russian village of Nikola-Lenivets, collaborating with local villagers to transform the landscape into one of Europe's most remarkable land art parks. His monumental sculptures woven from willow, birch, and hay blend folk craft traditions with contemporary art, and he founded the Archstoyanie festival which has turned a semi-abandoned village into a world-famous cultural destination.",
+      "website": "https://en.nikola-lenivets.ru/polissky/en",
+      "portraitUrl": "https://upload.wikimedia.org/wikipedia/commons/1/13/Nikolay_Polissky.JPG",
+      "tags": ["plants", "earth", "fire"]
+    },
+    {
+      "id": "martin-hill",
+      "name": "Martin Hill",
+      "born": 1946,
+      "nationality": "British-New Zealander",
+      "bio": "Martin Hill creates ephemeral circular environmental sculptures in the wild landscapes of New Zealand and around the world, collaborating with partner Philippa Jones since 1994. Using ice, stone, plants, and other natural materials that return to nature after being photographed, his work embodies the principles of a circular economy and the interconnectedness of the web of life.",
+      "website": "https://www.martin-hill.com",
+      "portraitUrl": "",
+      "tags": ["ice", "stone", "plants", "water"]
     }
   ],
   "artworks": [
@@ -2043,6 +2113,475 @@
       "videoLinks": [],
       "exhibitions": ["Centre Pompidou, Paris, 2022"],
       "referenceUrl": "https://www.resoundings.info"
+    },
+    {
+      "id": "surrounded-islands",
+      "artistId": "christo-jeanne-claude",
+      "title": "Surrounded Islands",
+      "year": 1983,
+      "description": "Eleven islands in Biscayne Bay, Miami, were surrounded with 603,850 square meters of floating pink woven polypropylene fabric that extended 61 meters from each island into the water. The installation, which took over three years to plan and cost $3.5 million self-financed through art sales, was on view for just 11 days in May 1983, creating a stunning flamingo-pink archipelago visible from the air.",
+      "location": "Biscayne Bay, Greater Miami, Florida, USA",
+      "materials": [
+        "Pink woven polypropylene fabric",
+        "Styrofoam booms",
+        "Steel cables",
+        "Anchoring system"
+      ],
+      "dimensions": "6.5 million sq ft of fabric surrounding 11 islands, extending 61m from shore",
+      "elements": ["water", "wind", "fiber"],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/4/4a/Surrounded_Islands.png"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Biscayne Bay, Miami, May 1983 (11 days)",
+        "Perez Art Museum Miami retrospective exhibition"
+      ],
+      "referenceUrl": "https://christojeanneclaude.net/artworks/surrounded-islands/"
+    },
+    {
+      "id": "the-floating-piers",
+      "artistId": "christo-jeanne-claude",
+      "title": "The Floating Piers",
+      "year": 2016,
+      "description": "A 3-kilometer walkway of shimmering saffron-yellow fabric stretched across Lake Iseo in northern Italy, connecting the town of Sulzano to the islands of Monte Isola and San Paolo. Supported by 226,000 high-density polyethylene cubes and anchored by 220 six-ton anchors at depths up to 92 meters, the 16-meter-wide piers allowed 1.2 million visitors to walk on water over 16 days.",
+      "location": "Lake Iseo, Lombardy, Italy",
+      "materials": [
+        "226,000 high-density polyethylene cubes",
+        "70,000 sq m saffron-yellow nylon fabric",
+        "220 six-ton anchors",
+        "100,000 sq m felt underlayer"
+      ],
+      "dimensions": "3 km long, 16 m wide, 35 cm above water",
+      "elements": ["water", "wind", "fiber", "sun"],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/a/a1/The_Floating_Piers_from_Rocca_di_Monte_Isola_-_P1000799_straighten.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/c/cf/Iseo_Floating_Piers_7.jpg"
+      ],
+      "videoLinks": [
+        "https://www.youtube.com/watch?v=dvEqMl2F3Ys"
+      ],
+      "exhibitions": [
+        "Lake Iseo, Italy, June 18 - July 3, 2016 (16 days)"
+      ],
+      "referenceUrl": "https://christojeanneclaude.net/artworks/the-floating-piers/"
+    },
+    {
+      "id": "the-gates",
+      "artistId": "christo-jeanne-claude",
+      "title": "The Gates",
+      "year": 2005,
+      "description": "7,503 steel gates, each 4.87 meters high with free-hanging saffron-colored nylon fabric panels, lined 37 kilometers of pathways through Central Park in New York City. Conceived in 1979 and finally realized 26 years later, the installation used 5,390 tons of steel and 99,155 square meters of fabric, creating a flowing river of color through the winter landscape for 16 days in February 2005.",
+      "location": "Central Park, New York City, USA",
+      "materials": [
+        "5,390 tons of steel",
+        "99,155 sq m saffron-colored nylon fabric",
+        "315,491 feet of vinyl tubing",
+        "15,000 steel base units"
+      ],
+      "dimensions": "7,503 gates, each 4.87m high, spanning 37 km of pathways",
+      "elements": ["wind", "fiber", "metal"],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/a/a8/ChristoGates.JPG",
+        "https://upload.wikimedia.org/wikipedia/commons/6/62/Gates_f.jpg"
+      ],
+      "videoLinks": [
+        "https://www.youtube.com/watch?v=Xmz4KLdnVpo"
+      ],
+      "exhibitions": [
+        "Central Park, New York City, February 12-27, 2005 (16 days)"
+      ],
+      "referenceUrl": "https://christojeanneclaude.net/artworks/the-gates/"
+    },
+    {
+      "id": "a-line-made-by-walking",
+      "artistId": "richard-long",
+      "title": "A Line Made by Walking",
+      "year": 1967,
+      "description": "Created when Long was a 22-year-old art student at Saint Martin's School of Art, this seminal work was made by walking back and forth in a straight line through a field of grass in Wiltshire, England, until the flattened blades formed a visible path, which he then photographed. Considered one of the most important early works in the history of both land art and conceptual art, it proposed that the simple act of walking could be sculpture.",
+      "location": "Wiltshire, England, UK",
+      "materials": [
+        "Grass",
+        "Walking (footsteps)"
+      ],
+      "dimensions": "Photograph: 825 x 1125 mm (gelatin silver print on paper)",
+      "elements": ["earth", "plants"],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": [
+        "Tate collection (photograph)",
+        "Included in numerous retrospective exhibitions worldwide"
+      ],
+      "referenceUrl": "https://www.tate.org.uk/art/artworks/long-a-line-made-by-walking-p07149"
+    },
+    {
+      "id": "sahara-circle",
+      "artistId": "richard-long",
+      "title": "Sahara Circle",
+      "year": 1988,
+      "description": "During a solitary walk through the Hoggar region of the Sahara in southern Algeria, Long arranged a ring of desert rocks around a circular area he had cleared within a patch of broken stones. The work exemplifies his lifelong practice of creating simple geometric forms in remote landscapes using materials found underfoot, reflecting his belief that circles have belonged to all people at all times.",
+      "location": "Hoggar, Sahara Desert, Algeria",
+      "materials": [
+        "Desert sandstone rocks"
+      ],
+      "dimensions": "Variable (documented as photograph, 159 x 1276 mm print at Tate)",
+      "elements": ["stone", "sand", "earth"],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": [
+        "Tate Modern, London (photographic documentation)"
+      ],
+      "referenceUrl": "https://www.tate.org.uk/art/artworks/long-sahara-circle-t12036"
+    },
+    {
+      "id": "south-bank-circle",
+      "artistId": "richard-long",
+      "title": "South Bank Circle",
+      "year": 1991,
+      "description": "A large floor sculpture made from pieces of Delabole slate arranged in a circle on the gallery floor. The work brings the raw materials of the English landscape into the formal gallery space, creating a meditative geological presence that evokes ancient stone circles while remaining firmly contemporary in its minimalist arrangement.",
+      "location": "Tate Liverpool, England, UK",
+      "materials": [
+        "Delabole slate"
+      ],
+      "dimensions": "Variable diameter circle",
+      "elements": ["stone", "earth"],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/f/f0/South_Bank_Circle_by_Richard_Long%2C_Tate_Liverpool.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Tate Liverpool, permanent collection"
+      ],
+      "referenceUrl": "http://www.richardlong.org"
+    },
+    {
+      "id": "lake-baikal-drawing",
+      "artistId": "jim-denevan",
+      "title": "Lake Baikal Drawing",
+      "year": 2010,
+      "description": "The world's largest single artwork, created over 15 days on the frozen surface of Lake Baikal in Siberia, Russia. Denevan and his crew carved a spiral of over one thousand circles arranged along a Fibonacci curve, growing from an origin of 18 inches to several miles in diameter, covering 12.5 square miles of ice. The work was documented in the film Art Hard (2011).",
+      "location": "Lake Baikal, Siberia, Russia",
+      "materials": [
+        "Ice (frozen lake surface)",
+        "Hand tools for carving"
+      ],
+      "dimensions": "12.5 square miles (over 1,000 circles)",
+      "elements": ["ice", "earth", "sand"],
+      "imageUrls": [],
+      "videoLinks": [
+        "https://www.youtube.com/watch?v=nqR2fKkQ0zc"
+      ],
+      "exhibitions": [
+        "Documented in film Art Hard (2011)"
+      ],
+      "referenceUrl": "https://jimdenevan.com/project/siberia/"
+    },
+    {
+      "id": "angle-of-repose",
+      "artistId": "jim-denevan",
+      "title": "Angle of Repose",
+      "year": 2022,
+      "description": "Created for Desert X AlUla 2022 in Saudi Arabia, this large-scale sand composition consists of 365 mounds of collected sand radially emerging around a central point. The first concentric circle comprises 26 mounds, each the size of a newborn child, with the composition growing outward. Visitors can walk through the mounds on a contemplative journey as sun, wind, and gravity slowly erode the forms.",
+      "location": "AlUla Desert, Saudi Arabia",
+      "materials": [
+        "Desert sand"
+      ],
+      "dimensions": "365 mounds in concentric circles, site-scale",
+      "elements": ["sand", "sun", "wind"],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": [
+        "Desert X AlUla 2022"
+      ],
+      "referenceUrl": "https://desertx.org/dx/desert-x-alula-2022/jim-denevan"
+    },
+    {
+      "id": "black-rock-desert-drawing",
+      "artistId": "jim-denevan",
+      "title": "Apollonian Gasket, Black Rock Desert",
+      "year": 2009,
+      "description": "Based on the mathematical theorem called an Apollonian gasket, this monumental drawing on the dry lake bed of Nevada's Black Rock Desert consisted of triples of circles at tangents to others. The drawing took 15 days to complete, measured three miles wide with an overall circumference of nine miles, and at the time was considered the world's largest single artwork before the Lake Baikal project surpassed it.",
+      "location": "Black Rock Desert, Nevada, USA",
+      "materials": [
+        "Desert playa surface",
+        "Hand tools (rake, stick)"
+      ],
+      "dimensions": "3 miles wide, 9-mile circumference",
+      "elements": ["sand", "earth", "sun"],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": [
+        "Ephemeral site-specific work"
+      ],
+      "referenceUrl": "https://jimdenevan.com"
+    },
+    {
+      "id": "konrads-passage",
+      "artistId": "cornelia-konrads",
+      "title": "Passage",
+      "year": 2015,
+      "description": "Installed at the Centre d'Arts et de Nature at the Domaine de Chaumont-sur-Loire in France, Passage creates a literal pathway back into nature at the border of a forest and the start of a narrow trail. Cut-down branches are returned to the cleared area, mounted upon an iron frame and suspended with steel rope, forming a roughly organized door frame that drifts upward and outward as if the materials are escaping gravity.",
+      "location": "Domaine de Chaumont-sur-Loire, France",
+      "materials": [
+        "Twigs and branches",
+        "Iron frame",
+        "Steel cable",
+        "Paint"
+      ],
+      "dimensions": "Site-specific, approximately 4m height",
+      "elements": ["plants", "metal", "air"],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": [
+        "Centre d'Arts et de Nature, Domaine de Chaumont-sur-Loire, 2015 Art Season"
+      ],
+      "referenceUrl": "https://domaine-chaumont.fr/en/centre-arts-and-nature/archives/2015-art-season/cornelia-konrads"
+    },
+    {
+      "id": "konrads-the-gate",
+      "artistId": "cornelia-konrads",
+      "title": "The Gate",
+      "year": 2004,
+      "description": "Installed in the forest of Fontainebleau, France, this gravity-defying installation transforms an old stone doorway into something otherworldly. Stones appear to hang weightless in mid-air as they crumble away from existing stonework, streaming upward from the weathered posts of an abandoned entrance as if caught in a moment of ethereal disintegration.",
+      "location": "Forest of Fontainebleau, France",
+      "materials": [
+        "Local stones",
+        "Steel wire (hidden support)",
+        "Existing stone posts"
+      ],
+      "dimensions": "Site-specific, approximately 3m height",
+      "elements": ["stone", "air"],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": [
+        "Permanent installation, Forest of Fontainebleau"
+      ],
+      "referenceUrl": "https://www.cokonrads.de"
+    },
+    {
+      "id": "konrads-trans-piles",
+      "artistId": "cornelia-konrads",
+      "title": "Trans-Piles",
+      "year": 2010,
+      "description": "Part of the artist's ongoing 'Piles' series, Trans-Piles features conical stacks of stones and wood that appear to dissolve into the air, with materials streaming upward from the top of each pile as if evaporating into the sky. Inspired by the wishing stone cones of Asian shamanic traditions older than Buddhism, the work plays with gravity, dissolution, and the boundary between nature and culture.",
+      "location": "Various sculpture parks, Europe",
+      "materials": [
+        "Local stones",
+        "Logs and branches",
+        "Hidden steel supports"
+      ],
+      "dimensions": "Variable, approximately 2-4m height per pile",
+      "elements": ["stone", "plants", "air"],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": [
+        "Various international sculpture parks and land art exhibitions"
+      ],
+      "referenceUrl": "https://www.cokonrads.de"
+    },
+    {
+      "id": "garden-of-cosmic-speculation",
+      "artistId": "charles-jencks",
+      "title": "Garden of Cosmic Speculation",
+      "year": 2003,
+      "description": "A 12-hectare (30-acre) sculpture garden at Portrack House in Dumfriesshire, Scotland, created by Jencks with his late wife Maggie Keswick Jencks. The garden features over twenty areas designed around scientific and mathematical metaphors, including a DNA garden, Quark Walk, Fractal Terrace, and spiraling landform mounds sculpted from the earth, with each element telling part of the story of the cosmos from the Big Bang to human consciousness.",
+      "location": "Portrack House, Dumfriesshire, Scotland, UK",
+      "materials": [
+        "Earth (sculpted landforms)",
+        "Water (lakes and ponds)",
+        "Steel",
+        "Aluminium",
+        "Plants and grass"
+      ],
+      "dimensions": "12 hectares (30 acres), over 20 themed areas",
+      "elements": ["earth", "water", "metal", "plants"],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/2/21/Wfm_jenks_landform.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/e/e6/Blackhole6.JPG",
+        "https://upload.wikimedia.org/wikipedia/commons/0/05/Steelcurves.JPG"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Open to the public one day per year for Scotland's Gardens Scheme"
+      ],
+      "referenceUrl": "https://www.charlesjencks.com/the-garden-of-cosmic-speculation"
+    },
+    {
+      "id": "crawick-multiverse",
+      "artistId": "charles-jencks",
+      "title": "Crawick Multiverse",
+      "year": 2015,
+      "description": "Jencks's largest work in Britain, this 55-acre landscape artwork was created on the site of a former open-cast coal mine near Sanquhar in Dumfries and Galloway, Scotland. Nine monumental landforms constructed from earth and 2,000 boulders found on the site represent cosmological themes including galaxies, comets, the sun, black holes, and the speculative multiverse, connected by a network of paths. Opened on the summer solstice 2015, it is free and open to the public.",
+      "location": "Sanquhar, Dumfries and Galloway, Scotland, UK",
+      "materials": [
+        "Earth from former coal mine",
+        "2,000 boulders",
+        "Grass",
+        "Gravel paths"
+      ],
+      "dimensions": "55 acres, nine landforms",
+      "elements": ["earth", "stone"],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/4/4f/Crawick_Multiverse_stone_rows.JPG",
+        "https://upload.wikimedia.org/wikipedia/commons/0/08/Landform_at_Crawick_Multiverse_22.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/9/9a/The_Multiverse_and_Galaxies_at_the_Crawick_Multiverse.JPG"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Permanent public artwork, opened June 21, 2015"
+      ],
+      "referenceUrl": "https://www.crawickmultiverse.co.uk"
+    },
+    {
+      "id": "cells-of-life",
+      "artistId": "charles-jencks",
+      "title": "Cells of Life",
+      "year": 2010,
+      "description": "Eight sculptural landforms and a connecting causeway surround four lakes and a flat parterre at Jupiter Artland near Edinburgh. Developed from 2003 to 2010, the earthworks reference the cellular process of mitosis, with hill formations sculpted into layered spirals that, seen from above, present the early stages of cell division into membranes and nuclei, marking the entrance to the sculpture park.",
+      "location": "Jupiter Artland, Bonnington House, near Edinburgh, Scotland, UK",
+      "materials": [
+        "Earth (sculpted landforms)",
+        "Water (four lakes)",
+        "Grass",
+        "Gravel paths"
+      ],
+      "dimensions": "Eight landforms surrounding four lakes, site-scale",
+      "elements": ["earth", "water", "plants"],
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/5/5f/CellsofLife_CharlesJencks_2005_Photo_AllanPollokMorris_CourtesyJupiterArtland_12.jpg"
+      ],
+      "videoLinks": [],
+      "exhibitions": [
+        "Permanent installation at Jupiter Artland, opened 2010"
+      ],
+      "referenceUrl": "https://www.jupiterartland.org/art/cells-of-life/"
+    },
+    {
+      "id": "polissky-snowmen",
+      "artistId": "nikolay-polissky",
+      "title": "Snowmen",
+      "year": 2000,
+      "description": "The first land art project in Nikola-Lenivets and the work that launched Polissky's career as a land artist. After envisioning hundreds of snowmen on the high bank of the Ugra River, Polissky enlisted villagers to build approximately 220 snow figures on the sloping riverbank, creating an army of snowmen marching over the winter fields. This collaborative process with local residents became the model for all his subsequent work.",
+      "location": "Nikola-Lenivets, Kaluga Region, Russia",
+      "materials": [
+        "Snow"
+      ],
+      "dimensions": "Approximately 220 snowmen across the riverbank",
+      "elements": ["ice", "water", "earth"],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": [
+        "Nikola-Lenivets, winter 2000"
+      ],
+      "referenceUrl": "https://en.nikola-lenivets.ru/polissky/en"
+    },
+    {
+      "id": "polissky-beaubourg",
+      "artistId": "nikolay-polissky",
+      "title": "Beaubourg (Bobur)",
+      "year": 2013,
+      "description": "A towering 22-meter (72-foot) sculpture resembling a cluster of organ pipes or trumpeting elephants, constructed from birch twigs woven onto a metal skeleton using traditional Russian basket-weaving techniques. Inspired by the architecture of the Centre Pompidou in Paris, the structure contains a spiral staircase inside leading to an observation deck at the top, offering panoramic views over the Nikola-Lenivets landscape.",
+      "location": "Nikola-Lenivets Art Park, Kaluga Region, Russia",
+      "materials": [
+        "Birch twigs and vines",
+        "Metal frame",
+        "Traditional weaving techniques"
+      ],
+      "dimensions": "22 m (72 ft) height",
+      "elements": ["plants", "metal", "air"],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": [
+        "Permanent installation at Nikola-Lenivets Art Park",
+        "Bobur Festival of Art, July 2013"
+      ],
+      "referenceUrl": "http://en.polissky.ru/artworks/"
+    },
+    {
+      "id": "polissky-universal-mind",
+      "artistId": "nikolay-polissky",
+      "title": "Universal Mind",
+      "year": 2012,
+      "description": "The largest installation ever created by Polissky, Universal Mind is a gigantic sculpture of two hemispheres representing a mechanical brain, 14 meters in diameter, made of curved wooden beams with mirror plates. Part of his scientific series, the sculpture sits on a pedestal and at night comes alive as pulsating lights simulate billions of racing neurons, combining traditional natural materials with a wholly new vision of monumental wooden sculpture.",
+      "location": "Nikola-Lenivets Art Park, Kaluga Region, Russia",
+      "materials": [
+        "Curved wooden beams",
+        "Mirror plates",
+        "Nuts and bolts",
+        "LED lights"
+      ],
+      "dimensions": "14 m diameter",
+      "elements": ["plants", "metal", "light"],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": [
+        "Permanent installation at Nikola-Lenivets Art Park, 2012",
+        "Archstoyanie Festival"
+      ],
+      "referenceUrl": "http://en.polissky.ru/artworks/universal-mind/"
+    },
+    {
+      "id": "hill-synergy",
+      "artistId": "martin-hill",
+      "title": "Synergy",
+      "year": 2009,
+      "description": "A tensegrity sculpture made from raupo stems (bulrush) interconnected by a network of flax threads, using nature's universal construction system where none of the stems touch and are held under compression by tension from the threads. The sculpture was photographed floating in the calm shallows of Lake Wanaka at sunset, its reflection in the still water completing the circular form that is central to Hill's artistic philosophy.",
+      "location": "Lake Wanaka, New Zealand",
+      "materials": [
+        "Raupo stems (bulrush)",
+        "Flax threads"
+      ],
+      "dimensions": "Approximately 1m diameter sphere",
+      "elements": ["plants", "water", "light"],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": [
+        "Documented as photograph in 'Fine Line' publication",
+        "Lake Wanaka artist project, 2009"
+      ],
+      "referenceUrl": "https://www.martin-hill.com/synergy"
+    },
+    {
+      "id": "hill-stone-circle",
+      "artistId": "martin-hill",
+      "title": "Stone Circle",
+      "year": 2006,
+      "description": "Using the natural buoyancy of pumice stones found on the shore of Lake Taupo, New Zealand, Hill threaded the lightweight volcanic stones onto a green stick bent into a half-circle in the shallow water. Photographed in calm early morning conditions with the camera near water level, the half-circle's reflection in the perfectly still lake surface completes a full circle, embodying Hill's exploration of cyclical natural processes.",
+      "location": "Whanganui Bay, Lake Taupo, New Zealand",
+      "materials": [
+        "Pumice stones",
+        "Green stick (bent)"
+      ],
+      "dimensions": "Approximately 0.5m radius half-circle",
+      "elements": ["stone", "water", "light"],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": [
+        "Featured in 'Earth to Earth' publication (2007)"
+      ],
+      "referenceUrl": "https://www.martin-hill.com"
+    },
+    {
+      "id": "hill-watershed",
+      "artistId": "martin-hill",
+      "title": "Watershed",
+      "year": 2014,
+      "description": "An exhibition and series of environmental sculptures examining the water cycle and climate change. Hill and Jones created ephemeral circular ice and stone sculptures in the mountains of New Zealand's South Island, each work representing a stage of the water cycle from glacial ice to flowing streams, documented through photography that captures the moment of perfect reflection before nature reclaims the materials.",
+      "location": "South Island mountains, New Zealand",
+      "materials": [
+        "Ice",
+        "Stone",
+        "Water"
+      ],
+      "dimensions": "Variable (site-specific ephemeral sculptures)",
+      "elements": ["ice", "water", "stone"],
+      "imageUrls": [],
+      "videoLinks": [],
+      "exhibitions": [
+        "McClelland Gallery, Melbourne, 2014",
+        "Exhibited in New Zealand, 2014"
+      ],
+      "referenceUrl": "https://www.martin-hill.com"
     }
   ]
 }
